@@ -3357,7 +3357,7 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
 			
 			
 			
-case kWarpSensorINA219:
+		case kWarpSensorINA219:
 		{
 			/*
 			 *	INA219: VDD 3.0--5.5
