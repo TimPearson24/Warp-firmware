@@ -70,6 +70,9 @@
 #	include "devCCS811.h"
 #	include "devAMG8834.h"
 #	include "devSSD1331.h"
+
+# 	include "devINA219.h"	//include header file of INA219
+
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
 //#include "devSI7021.h"
@@ -169,6 +172,12 @@ volatile WarpI2CDeviceState			deviceAS7263State;
 #ifdef WARP_BUILD_ENABLE_DEVRV8803C7
 volatile WarpI2CDeviceState			deviceRV8803C7State;
 #endif
+
+
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+volatile WarpI2CDeviceState			deviceINA219State;
+#endif
+
 
 /*
  *	TODO: move this and possibly others into a global structure
@@ -1254,6 +1263,12 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVSI7021
 	initSI7021(	0x40	/* i2cAddress */,	&deviceSI7021State	);
 #endif
+	
+
+#ifdef WARP_BUILD_ENABLE_DEVINA219	
+	initINA219(	0x40	/* i2cAddress */,	&deviceINA219State	);
+#endif
+	
 
 #ifdef WARP_BUILD_ENABLE_DEVL3GD20H
 	initL3GD20H(	0x6A	/* i2cAddress */,	&deviceL3GD20HState	);
@@ -1572,9 +1587,19 @@ main(void)
 				SEGGER_RTT_WriteString(0, "\r\t- 'k' AS7263			(0x00--0x2B): 2.7V -- 3.6V (compiled out) \n");
 #endif
 				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+				
+				
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+				SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x05): 3.0V -- 5.5V\n");
+				#else
+				SEGGER_RTT_WriteString(0, "\r\t- 'l' INA219			(0x00--0x05): 3.0V -- 5.5V (compiled out) \n");
+#endif				
+				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+				
 
 				SEGGER_RTT_WriteString(0, "\r\tEnter selection> ");
-				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+				OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);				
+				
 
 				key = SEGGER_RTT_WaitKey();
 
@@ -1721,6 +1746,14 @@ main(void)
 					{
 						menuTargetSensor = kWarpSensorAS7263;
 						menuI2cDevice = &deviceAS7263State;
+						break;
+					}
+#endif
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+					case 'l':
+					{
+						menuTargetSensor = kWarpSensorINA219;
+						menuI2cDevice = &deviceINA219State;
 						break;
 					}
 #endif
@@ -2665,6 +2698,10 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		#ifdef WARP_BUILD_ENABLE_DEVHDC1000
 		printSensorDataHDC1000(hexModeFlag);
 		#endif
+		
+		#ifdef WARP_BUILD_ENABLE_DEVINA219
+		printSensorDataINA219(hexModeFlag);
+		#endif
 	
 
 		#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
@@ -3317,6 +3354,39 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
 #endif
 			break;
 		}
+			
+			
+			
+case kWarpSensorINA219:
+		{
+			/*
+			 *	INA219: VDD 3.0--5.5
+			 */
+#ifdef WARP_BUILD_ENABLE_DEVINA219
+			loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
+					&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
+					&deviceINA219State,		/*	i2cDeviceState			*/
+					NULL,				/*	spiDeviceState			*/
+					baseAddress,			/*	baseAddress			*/
+					0x00,				/*	minAddress			*/
+					0x05,				/*	maxAddress			*/
+					repetitionsPerAddress,		/*	repetitionsPerAddress		*/
+					chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
+					spinDelay,			/*	spinDelay			*/
+					autoIncrement,			/*	autoIncrement			*/
+					sssupplyMillivolts,		/*	sssupplyMillivolts		*/
+					referenceByte,			/*	referenceByte			*/
+					adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
+					chatty				/*	chatty				*/
+					);
+			#else
+			SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :( ");
+#endif
+			break;
+		}			
+			
+			
+			
 
 		default:
 		{
