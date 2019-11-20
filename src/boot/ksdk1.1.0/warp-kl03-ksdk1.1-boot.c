@@ -1404,6 +1404,8 @@ main(void)
 
 		SEGGER_RTT_WriteString(0, "\rSelect:\n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
+		SEGGER_RTT_WriteString(0, "\r- '#': obtain INA219 current measurement.\n");
+		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);		
 		SEGGER_RTT_WriteString(0, "\r- 'a': set default sensor.\n");
 		OSA_TimeDelay(gWarpMenuPrintDelayMilliseconds);
 		SEGGER_RTT_WriteString(0, "\r- 'b': set I2C baud rate.\n");
