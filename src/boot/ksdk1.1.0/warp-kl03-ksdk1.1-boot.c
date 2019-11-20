@@ -1469,23 +1469,9 @@ main(void)
 
 		switch (key)
 		{
-			//current measurement
-			
-			/*case '#':
-			{
-				SEGGER_RTT_printf(0, "\r\tCow goes nayy \n");
-				enableI2Cpins(menuI2cPullupValue);
-				printSensorDataINA219();
-
-				break;
-			}*/
-
 			/*
 			 *	Activate low-power modes in all sensors.
 			 */
-				
-				
-				
 				
 				
 			/*
