@@ -71,7 +71,7 @@
 #	include "devAMG8834.h"
 #	include "devSSD1331.h"
 
-# 	include "devINA219.h"	//include header file of INA219
+//# 	include "devINA219.h"	//include header file of INA219
 
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
@@ -84,6 +84,7 @@
 //#include "devRV8803C7.h"
 #else
 #	include "devMMA8451Q.h"
+//#	include "devINA219.h"	//include header file of INA219
 #endif
 
 #define WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
@@ -1752,6 +1753,7 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 					case 'l':
 					{
+						SEGGER_RTT_printf(0, "\r\tCow goes moo \n");
 						menuTargetSensor = kWarpSensorINA219;
 						menuI2cDevice = &deviceINA219State;
 						break;
