@@ -57,6 +57,8 @@
 
 #define WARP_FRDMKL03
 
+
+
 /*
 *	Comment out the header file to disable devices
 */
@@ -84,7 +86,7 @@
 //#include "devRV8803C7.h"
 #else
 #	include "devMMA8451Q.h"
-//#	include "devINA219.h"	//include header file of INA219
+#	include "devINA219.h"	//include header file of INA219
 #endif
 
 #define WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
