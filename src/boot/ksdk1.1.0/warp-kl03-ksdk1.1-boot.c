@@ -1475,7 +1475,7 @@ main(void)
 			{
 				SEGGER_RTT_printf(0, "\r\tCase # = current measurement\n");
 				enableI2Cpins(menuI2cPullupValue);
-				printSensorDataINA219();
+				//printSensorDataINA219();
 				
 				
 				SEGGER_RTT_printf(0, "\r\tmeasurement in boot.c\n");
@@ -1483,13 +1483,17 @@ main(void)
 				uint16_t	readSensorRegisterValueLSB;
 				uint16_t	readSensorRegisterValueMSB;
 				int16_t		readSensorRegisterValueCombined;
+				int16_t		currentMeasurement;
 				
 				writeSensorRegisterINA219(0x01,0x00,1);
 				readSensorRegisterINA219(2);
 				readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
         			readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
         			readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);
-				SEGGER_RTT_printf(0, "\nShunt Voltage Reading: %d, giving Shunt Voltage: %duV, giving Current: %duA", readSensorRegisterValueCombined,readSensorRegisterValueCombined*10, readSensorRegisterValueCombined*100);
+				
+				currentMeasurement = readSensorRegisterValueCombined/0.1 	//I=Vshunt/Rshunt
+				
+				SEGGER_RTT_printf(0, "Current = %dA", currentMeasurement);
 				
 				break;
 			}
