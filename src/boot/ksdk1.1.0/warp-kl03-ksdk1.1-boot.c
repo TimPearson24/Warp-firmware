@@ -1481,7 +1481,7 @@ main(void)
 				uint16_t	readSensorRegisterValueMSB;
 				int16_t		readSensorRegisterValueCombined;
 				int16_t		currentMeasurement;
-				
+				/*
 				writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
 				readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
 				readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
@@ -1491,7 +1491,21 @@ main(void)
 				currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
 				
 				SEGGER_RTT_printf(0, "Current = %duA", currentMeasurement);	//print current measurement to screen
+				*/
+				int i = 0;
 				
+				while(i < 10)
+				{
+					writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+					readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+					readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+        				readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+        				readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
+					currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+					SEGGER_RTT_printf(0,currentMeasurement);	//print current measurement to screen
+					
+					i = i + 1;
+				}
 				break;
 			}
 				
