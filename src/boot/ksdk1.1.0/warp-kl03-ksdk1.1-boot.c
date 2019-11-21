@@ -1476,7 +1476,14 @@ main(void)
 				SEGGER_RTT_printf(0, "\r\tCase # = current measurement\n");
 				enableI2Cpins(menuI2cPullupValue);
 				printSensorDataINA219();
+				
+				
 				SEGGER_RTT_printf(0, "\r\tmeasurement in boot.c\n");
+				
+				uint16_t	readSensorRegisterValueLSB;
+				uint16_t	readSensorRegisterValueMSB;
+				int16_t		readSensorRegisterValueCombined;
+				
 				writeSensorRegisterINA219(0x01,0x00,1);
 				readSensorRegisterINA219(2);
 				readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
