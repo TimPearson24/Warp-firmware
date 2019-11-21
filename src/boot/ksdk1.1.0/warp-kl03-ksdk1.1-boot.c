@@ -73,8 +73,6 @@
 #	include "devAMG8834.h"
 #	include "devSSD1331.h"
 
-//# 	include "devINA219.h"	//include header file of INA219
-
 //#include "devTCS34725.h"
 //#include "devSI4705.h"
 //#include "devSI7021.h"
@@ -1475,10 +1473,17 @@ main(void)
 
 			case '#':
 			{
-				SEGGER_RTT_printf(0, "\r\tCow goes nayy \n");
+				SEGGER_RTT_printf(0, "\r\tCase # = current measurement\n");
 				enableI2Cpins(menuI2cPullupValue);
 				printSensorDataINA219();
-
+				SEGGER_RTT_printf(0, "\r\tmeasurement in boot.c\n");
+				writeSensorRegisterINA219(0x01,0x00,1);
+				readSensorRegisterINA219(2);
+				readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+        			readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+        			readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);
+				SEGGER_RTT_printf(0, "\nShunt Voltage Reading: %d, giving Shunt Voltage: %duV, giving Current: %duA", readSensorRegisterValueCombined,readSensorRegisterValueCombined*10, readSensorRegisterValueCombined*100);
+				
 				break;
 			}
 				
@@ -1775,7 +1780,6 @@ main(void)
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 					case 'l':
 					{
-						SEGGER_RTT_printf(0, "\r\tCow goes moo \n");
 						menuTargetSensor = kWarpSensorINA219;
 						menuI2cDevice = &deviceINA219State;
 						break;
@@ -2723,10 +2727,11 @@ printAllSensors(bool printHeadersAndCalibration, bool hexModeFlag, int menuDelay
 		printSensorDataHDC1000(hexModeFlag);
 		#endif
 		
+		/*
 		#ifdef WARP_BUILD_ENABLE_DEVINA219
 		printSensorDataINA219(hexModeFlag);
 		#endif
-	
+		*/
 
 		#ifdef WARP_BUILD_ENABLE_SEGGER_RTT_PRINTF
 		SEGGER_RTT_printf(0, " %d, %d, %d\n", RTC->TSR, RTC->TPR, numberOfConfigErrors);
@@ -3380,35 +3385,35 @@ repeatRegisterReadForDeviceAndAddress(WarpSensorDevice warpSensorDevice, uint8_t
 		}
 			
 			
-			
+		/*	
 		case kWarpSensorINA219:
 		{
-			/*
-			 *	INA219: VDD 3.0--5.5
-			 */
+			
+			 //	INA219: VDD 3.0--5.5
+			 
 #ifdef WARP_BUILD_ENABLE_DEVINA219
 			loopForSensor(	"\r\nINA219:\n\r",		/*	tagString			*/
-					&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
-					&deviceINA219State,		/*	i2cDeviceState			*/
-					NULL,				/*	spiDeviceState			*/
-					baseAddress,			/*	baseAddress			*/
-					0x00,				/*	minAddress			*/
-					0x05,				/*	maxAddress			*/
-					repetitionsPerAddress,		/*	repetitionsPerAddress		*/
-					chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
-					spinDelay,			/*	spinDelay			*/
-					autoIncrement,			/*	autoIncrement			*/
-					sssupplyMillivolts,		/*	sssupplyMillivolts		*/
-					referenceByte,			/*	referenceByte			*/
-					adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
-					chatty				/*	chatty				*/
-					);
-			#else
-			SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :( ");
-#endif
-			break;
-		}			
-			
+					//&readSensorRegisterINA219,	/*	readSensorRegisterFunction	*/
+					//&deviceINA219State,		/*	i2cDeviceState			*/
+					//NULL,				/*	spiDeviceState			*/
+					//baseAddress,			/*	baseAddress			*/
+					//0x00,				/*	minAddress			*/
+					//0x05,				/*	maxAddress			*/
+					//repetitionsPerAddress,		/*	repetitionsPerAddress		*/
+					//chunkReadsPerAddress,		/*	chunkReadsPerAddress		*/
+					//spinDelay,			/*	spinDelay			*/
+					//autoIncrement,			/*	autoIncrement			*/
+					//sssupplyMillivolts,		/*	sssupplyMillivolts		*/
+					//referenceByte,			/*	referenceByte			*/
+					//adaptiveSssupplyMaxMillivolts,	/*	adaptiveSssupplyMaxMillivolts	*/
+					//chatty				/*	chatty				*/
+					//);
+			//#else
+			//SEGGER_RTT_WriteString(0, "\r\n\tINA219 Read Aborted. Device Disabled :( ");
+//#endif
+			//break;
+		//}			
+		
 			
 			
 
