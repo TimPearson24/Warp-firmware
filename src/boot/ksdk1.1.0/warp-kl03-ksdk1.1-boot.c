@@ -1502,7 +1502,7 @@ main(void)
         				readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
         				readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
 					currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-					SEGGER_RTT_printf(0,currentMeasurement);	//print current measurement to screen
+					SEGGER_RTT_printf(0,"%d", currentMeasurement);	//print current measurement to screen
 					
 					i = i + 1;
 				}
