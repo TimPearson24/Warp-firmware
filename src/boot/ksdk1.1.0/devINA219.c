@@ -116,7 +116,7 @@ printSensorDataINA219()
 	readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
 	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
 	// Taking the top 12 bits as defined by the data sheet:
-	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 5) | ((readSensorRegisterValueLSB & 0xF8) >> 2);
+	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 5) | ((readSensorRegisterValueLSB & 0xF8) >> 3);
 	SEGGER_RTT_printf(0, "\nBus Voltage Reading: %d, giving Bus Voltage: %dmV", readSensorRegisterValueCombined, readSensorRegisterValueCombined * 4);
 
 	// Set pointer address to Shunt Voltage (0x01 from data sheet)
