@@ -1361,7 +1361,7 @@ main(void)
 	while (1)
 	{
 		
-				SEGGER_RTT_printf(0, "\r\tCase # = current measurement\n");
+				SEGGER_RTT_printf(0, "in main loop");
 				enableI2Cpins(menuI2cPullupValue);
 				//printSensorDataINA219();
 				
@@ -1390,10 +1390,12 @@ main(void)
         				readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
    	   				readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
 					currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-					SEGGER_RTT_printf(0,"%d\n", currentMeasurement);	//print current measurement to screen
+					//SEGGER_RTT_printf(0,"%d\n", currentMeasurement);	//print current measurement to screen
 					
 					i = i + 1;
 				}
+				SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
+		
 				//break;
 
 		
