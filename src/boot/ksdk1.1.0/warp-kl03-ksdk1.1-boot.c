@@ -1398,8 +1398,14 @@ main(void)
 				
 		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
 		{
-			SEGGER_RTT_printf(0, "\r\tButton pressed\n");
+			SEGGER_RTT_printf(0, "\r\tOn board button pressed\n");
 		}
+		
+		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+		{
+			SEGGER_RTT_printf(0, "\r\tOff board button pressed\n");
+		}
+
 			
 
 		
