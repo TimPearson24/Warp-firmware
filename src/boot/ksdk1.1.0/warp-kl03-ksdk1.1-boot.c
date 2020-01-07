@@ -1406,7 +1406,6 @@ main(void)
 			{
 				i = i + 1;
 				OSA_TimeDelay(1);
-				SEGGER_RTT_printf(0, "\r\t%d\n", i);
 				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 				{
 					latch = 0;
@@ -1420,7 +1419,8 @@ main(void)
 //					//latch = 0;
 //				}
 //				SEGGER_RTT_printf(0, "%d", i);
-			}	
+			}
+			//SEGGER_RTT_printf(0, "\r\t%d\n", i);
 //
 		}
 		/*
