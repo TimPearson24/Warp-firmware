@@ -1403,7 +1403,6 @@ main(void)
 	int t2;
 	int t3;
 	int average_time;
-	int 
 	while (1)
 	{
 		int latch = 0;
