@@ -1361,6 +1361,8 @@ main(void)
 	int time_count = 0;
 	while (1)
 	{
+		int latch = 0;
+		int i = 0;
 		
 		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
 		enableI2Cpins(menuI2cPullupValue);
@@ -1371,12 +1373,10 @@ main(void)
 		
 		devSSD1331SEGMENT(10);
 		
-		int latch = 0;
-		int i = 0;
-		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
-		{
+		//if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
+		//{
 			latch = 1;
-			SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
+			//SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
 			while (latch == 1 && i < 10000)
 			{
 				i = i + 1;
@@ -1396,9 +1396,9 @@ main(void)
 			}
 			time_count = 2*i;
 			SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
-
+		OSA_TimeDelay(2000);
 //
-		}
+		//}
 		
 		
 		
