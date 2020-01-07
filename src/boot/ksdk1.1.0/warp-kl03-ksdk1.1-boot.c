@@ -1443,7 +1443,7 @@ main(void)
 					break;
 				}
 
-				case 150 ... 300:
+				case 151 ... 300:
 				{
 					SEGGER_RTT_printf(0, "\r\tGreater than 150\n");
 					break;
@@ -1451,7 +1451,7 @@ main(void)
 
 				default:
 				{
-					SEGGER_RTT_printf(0, "\r\tThis shouldn't happen\n");
+					SEGGER_RTT_printf(0, "\r\tGreater than 300\n");
 					break;
 				}
 		}
