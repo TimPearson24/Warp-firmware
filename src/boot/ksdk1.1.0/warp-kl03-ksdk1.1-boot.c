@@ -1402,15 +1402,16 @@ main(void)
 		{
 			latch = 1;
 			SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
-			while (latch == 1 && i < 3000)
+			while (latch == 1 && i < 10000)
 			{
 				i = i + 1;
 				OSA_TimeDelay(1);
-				SEGGER_RTT_printf(0, "%d", i);
+				SEGGER_RTT_printf(0, "\r\t%d\n", i);
 				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 				{
 					latch = 0;
 					SEGGER_RTT_printf(0, "\r\tOff board pressed\n");
+					SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", i);
 				}
 //				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
 //				{
