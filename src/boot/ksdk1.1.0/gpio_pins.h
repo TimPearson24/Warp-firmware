@@ -52,6 +52,7 @@ enum _gpio_pins
 	kWarpPinEXTAL0				= GPIO_MAKE_PIN(HW_GPIOA, 3),		/*	PTA3: EXTAL0												*/
 	kWarpPinXTAL0				= GPIO_MAKE_PIN(HW_GPIOA, 4),		/*	PTA4: XTAL0												*/
 	
+	//use kWarpPinTPS82740_VSEL1 (PTA5) as off board PTM switch
 	kWarpPinTPS82740_VSEL1			= GPIO_MAKE_PIN(HW_GPIOA, 5),		/*	Warp TPS82740_VSEL1	--> PTA5									*/
 	kWarpPinTPS82740_VSEL2			= GPIO_MAKE_PIN(HW_GPIOA, 8),		/*	Warp TPS82740_VSEL2	--> PTA8									*/
 	kWarpPinTPS82740B_CTLEN			= GPIO_MAKE_PIN(HW_GPIOA, 12),		/*	Warp kWarpPinTPS82740B_CTLEN --> PTA12 		(was kWarpPinTPS82675_EN in Warp v2)			*/
