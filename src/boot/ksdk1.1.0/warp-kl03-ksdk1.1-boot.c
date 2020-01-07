@@ -1365,12 +1365,51 @@ main(void)
 		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
 		enableI2Cpins(menuI2cPullupValue);
 		//printSensorDataINA219();
-				
+		
+		SEGGER_RTT_printf(0, "\r\tPrepare for flash\n");
+		OSA_TimeDelay(2000);
+		
+		devSSD1331SEGMENT(10);
+		
+		int latch = 0;
+		int i = 0;
+		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
+		{
+			latch = 1;
+			SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
+			while (latch == 1 && i < 10000)
+			{
+				i = i + 1;
+				OSA_TimeDelay(1);
+				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+				{
+					latch = 0;
+					SEGGER_RTT_printf(0, "\r\tOff board pressed\n");
+				}
+//				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
+//				{
+//					OSA_TimeDelay(200);
+//					SEGGER_RTT_printf(0, "\r\tOff 0\n");
+//					//latch = 0;
+//				}
+//				SEGGER_RTT_printf(0, "%d", i);
+			}
+			time_count = 2*i;
+			SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
+
+//
+		}
+		
+		
+		
+		
+		
+		/*
 		uint16_t	readSensorRegisterValueLSB;
 		uint16_t	readSensorRegisterValueMSB;
 		int16_t		readSensorRegisterValueCombined;
 		int16_t		currentMeasurement;
-		/*
+		
 		writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
 		readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
 		readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
@@ -1397,34 +1436,18 @@ main(void)
 		}
 		SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
 		*/
-		int latch = 0;
-		int i = 0;
-		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
-		{
-			latch = 1;
-			SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
-			while (latch == 1 && i < 10000)
-			{
-				i = i + 1;
-				OSA_TimeDelay(1);
-				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
-				{
-					latch = 0;
-					SEGGER_RTT_printf(0, "\r\tOff board pressed\n");
-					time_count = 2*i;
-					SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
-				}
-//				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
-//				{
-//					OSA_TimeDelay(200);
-//					SEGGER_RTT_printf(0, "\r\tOff 0\n");
-//					//latch = 0;
-//				}
-//				SEGGER_RTT_printf(0, "%d", i);
-			}
-			//SEGGER_RTT_printf(0, "\r\t%d\n", i);
-//
-		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		/*
 		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 		{
