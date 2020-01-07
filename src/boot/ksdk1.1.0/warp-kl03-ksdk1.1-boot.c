@@ -1435,6 +1435,19 @@ main(void)
 		
 		SEGGER_RTT_printf(0, "\r\tAverage time = %d ms\n", average_time);
 		
+		switch(average_time)
+		{
+			case < 150;
+				SEGGER_RTT_printf(0, "\r\tLess than 150\n");
+				break;
+			
+			case > 150;
+				SEGGER_RTT_printf(0, "\r\tGreater than 150\n");
+				break;
+		}
+		
+		
+		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
 			devSSD1331_graph();
