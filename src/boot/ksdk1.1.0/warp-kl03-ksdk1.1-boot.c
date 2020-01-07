@@ -1361,7 +1361,7 @@ main(void)
 	while (1)
 	{
 		
-		SEGGER_RTT_printf(0, "\r\tin main loop\n");
+		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
 		enableI2Cpins(menuI2cPullupValue);
 		//printSensorDataINA219();
 				
@@ -1381,7 +1381,7 @@ main(void)
 		SEGGER_RTT_printf(0, "Current = %duA", currentMeasurement);	//print current measurement to screen
 		*/
 		int i = 0;
-		
+		/*
 		while(i < 1000)
 		{
 			writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
@@ -1395,7 +1395,7 @@ main(void)
 			i = i + 1;
 		}
 		SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
-				
+		*/		
 		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
 		{
 			SEGGER_RTT_printf(0, "\r\tOn board button pressed\n");
