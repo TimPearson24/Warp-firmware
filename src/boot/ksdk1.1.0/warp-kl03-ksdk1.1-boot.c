@@ -1403,6 +1403,7 @@ main(void)
 	int t2;
 	int t3;
 	int average_time;
+	int 
 	while (1)
 	{
 		int latch = 0;
@@ -1441,6 +1442,7 @@ main(void)
 		}
 		
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
+		devSSD1331_clearscreen();
 		
 		OSA_TimeDelay(2000);
 //
