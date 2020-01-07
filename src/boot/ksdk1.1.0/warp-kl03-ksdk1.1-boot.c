@@ -1437,13 +1437,13 @@ main(void)
 		
 		switch(average_time)
 		{
-				case average_time < 150:
+				case 0 ... 150:
 				{
 					SEGGER_RTT_printf(0, "\r\tLess than 150\n");
 					break;
 				}
 
-				case average_time > 150:
+				case 150 ... 300:
 				{
 					SEGGER_RTT_printf(0, "\r\tGreater than 150\n");
 					break;
