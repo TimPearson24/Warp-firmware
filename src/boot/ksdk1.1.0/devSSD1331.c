@@ -179,17 +179,44 @@ devSSD1331init(void)
 	/*
 	 *	Any post-initialization drawing commands go here.
 	 */
+//	writeCommand(0x22);
+//	writeCommand(0x00);
+//      writeCommand(0x00);
+//      writeCommand(0x5F);
+//      writeCommand(0x3F);
+//	writeCommand(0x00);
+//	writeCommand(0x3F);
+//	writeCommand(0x00);
+//	writeCommand(0x00);
+//	writeCommand(0x3F);
+//	writeCommand(0x00);
+
+	return 0;
+}
+
+//function to generate a white flash on the OLED screen
+int
+devSSD1331SEGMENT(int flash_period)
+{
 	writeCommand(0x22);
 	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	
+	OSA_TimeDelay(flash_period);
+	
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
         writeCommand(0x00);
         writeCommand(0x5F);
         writeCommand(0x3F);
-	writeCommand(0x00);
-	writeCommand(0x3F);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0x3F);
-	writeCommand(0x00);
-
+	
 	return 0;
 }
