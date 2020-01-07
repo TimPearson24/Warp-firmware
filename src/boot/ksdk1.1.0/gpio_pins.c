@@ -46,12 +46,13 @@ gpio_output_pin_user_config_t	outputPins[] = {
 		.config.slewRate = kPortSlowSlewRate,
 		.config.driveStrength = kPortLowDriveStrength,
 	},
-	{
-		.pinName = kWarpPinTPS82740_VSEL1,
-		.config.outputLogic = 1,
-		.config.slewRate = kPortSlowSlewRate,
-		.config.driveStrength = kPortLowDriveStrength,
-	},
+//Move this pin from an output pin to an input pin for the on board PTM
+//	{
+//		.pinName = kWarpPinTPS82740_VSEL1,
+//		.config.outputLogic = 1,
+//		.config.slewRate = kPortSlowSlewRate,
+//		.config.driveStrength = kPortLowDriveStrength,
+//	},
 	{
 		.pinName = kWarpPinTPS82740_VSEL2,
 		.config.outputLogic = 1,
@@ -240,6 +241,15 @@ gpio_input_pin_user_config_t	inputPins[] = {
                 .config.pullSelect = kPortPullUp,
                 .config.isPassiveFilterEnabled = false,
                 .config.interrupt = kPortIntDisabled,
+        },
+	
+	//PTA5 - FOR THE OFFBOARD EXTERNAL SWITCH
+	{
+        	.pinName = kWarpPinTPS82740_VSEL1,
+        	.config.isPullEnable = true,
+        	.config.pullSelect = kPortPullUp,
+        	.config.isPassiveFilterEnabled = false,
+        	.config.interrupt = kPortIntDisabled,
         },
 	{
 		.pinName = GPIO_PINS_OUT_OF_RANGE,
