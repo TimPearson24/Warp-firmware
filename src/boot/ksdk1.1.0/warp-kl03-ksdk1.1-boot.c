@@ -1358,6 +1358,7 @@ main(void)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	devSSD1331init();
+	int i = 0;
 	while (1)
 	{
 		
@@ -1380,7 +1381,7 @@ main(void)
 		
 		SEGGER_RTT_printf(0, "Current = %duA", currentMeasurement);	//print current measurement to screen
 		*/
-		int i = 0;
+		//int i = 0;
 		/*
 		while(i < 1000)
 		{
@@ -1395,17 +1396,34 @@ main(void)
 			i = i + 1;
 		}
 		SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
-		*/		
-		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
+		*/
+//		int latch = 0;
+		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
 		{
-			SEGGER_RTT_printf(0, "\r\tOn board button pressed\n");
+//			latch = 1;
+//			SEGGER_RTT_printf(0, "\r\tOn board button pressed\n");
+//			while (latch == 1)
+//			{
+				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+				{
+					//i = i + 1;
+					SEGGER_RTT_printf(0, "\r\tOff 1\n");
+				}
+				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
+				{
+					SEGGER_RTT_printf(0, "\r\tOff 0\n");
+					//latch = 0;
+				}
+				//SEGGER_RTT_printf(0, "%d", i);
+//			}	
+//
 		}
-		
+		/*
 		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 		{
 			SEGGER_RTT_printf(0, "\r\tOff board button pressed\n");
 		}
-
+		*/
 			
 
 		
