@@ -420,6 +420,247 @@ devSSD1331_graph(void)
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
+	//draw 200
+		//2
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x39);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x00+0x39);	//column end
+	writeCommand(0x3D);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x00+0x39);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x39);	//column start
+	writeCommand(0x3C);	//row start
+	writeCommand(0x00+0x39);	//column end
+	writeCommand(0x3C);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37);	//column start
+	writeCommand(0x3E);	//row start
+	writeCommand(0x00+0x37);	//column end
+	writeCommand(0x3E);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+		//0 (tens)
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x3B);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x3B);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x02+0x3B);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x02+0x3B);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x3B);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x01+0x3B);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x3B);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x01+0x3B);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+		//0 (ones)
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x3F);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x02+0x3F);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x02+0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x3F);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x01+0x3F);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x3F);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x01+0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	//draw 300
+		//3
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37+0x1E);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37+0x1E);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x3D);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x37+0x1E);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x39+0x1E);	//column start
+	writeCommand(0x3C);	//row start
+	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x3C);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x39+0x1E);	//column start
+	writeCommand(0x3E);	//row start
+	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x3E);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+		//0 (tens)
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x02+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x02+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+		//0 (ones)
+	writeCommand(0x21);	//line command
+	writeCommand(0x00+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x00+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x02+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x02+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	
+	
+	
 	return 0;
 }
 
