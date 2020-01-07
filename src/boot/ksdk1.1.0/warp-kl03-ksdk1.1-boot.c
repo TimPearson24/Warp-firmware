@@ -1361,42 +1361,46 @@ main(void)
 	while (1)
 	{
 		
-				SEGGER_RTT_printf(0, "in main loop");
-				enableI2Cpins(menuI2cPullupValue);
-				//printSensorDataINA219();
+		SEGGER_RTT_printf(0, "\r\tin main loop\n");
+		enableI2Cpins(menuI2cPullupValue);
+		//printSensorDataINA219();
 				
-				uint16_t	readSensorRegisterValueLSB;
-				uint16_t	readSensorRegisterValueMSB;
-				int16_t		readSensorRegisterValueCombined;
-				int16_t		currentMeasurement;
-				/*
-				writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
-				readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
-				readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
-	      			readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-        			readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
-				
-				currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-				
-				SEGGER_RTT_printf(0, "Current = %duA", currentMeasurement);	//print current measurement to screen
-				*/
-				int i = 0;
-				
-				while(i < 1000)
-				{
-					writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
-					readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
-					readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
-        				readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-   	   				readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
-					currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-					//SEGGER_RTT_printf(0,"%d\n", currentMeasurement);	//print current measurement to screen
-					
-					i = i + 1;
-				}
-				SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
+		uint16_t	readSensorRegisterValueLSB;
+		uint16_t	readSensorRegisterValueMSB;
+		int16_t		readSensorRegisterValueCombined;
+		int16_t		currentMeasurement;
+		/*
+		writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+		readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+		readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+	      	readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+        	readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
 		
-				//break;
+		currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+		
+		SEGGER_RTT_printf(0, "Current = %duA", currentMeasurement);	//print current measurement to screen
+		*/
+		int i = 0;
+		
+		while(i < 1000)
+		{
+			writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+			readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+			readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+        		readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+   	   		readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
+			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+			//SEGGER_RTT_printf(0,"%d\n", currentMeasurement);	//print current measurement to screen
+			
+			i = i + 1;
+		}
+		SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
+				
+		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
+		{
+			SEGGER_RTT_printf(0, "\r\tButton pressed\n");
+		}
+			
 
 		
 		
