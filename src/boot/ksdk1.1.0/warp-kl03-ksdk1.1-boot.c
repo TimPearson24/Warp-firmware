@@ -1020,6 +1020,41 @@ checkSum(uint8_t *  pointer, uint16_t length) /*	Adapted from https://stackoverf
 	return (uint8_t)sum;
 }
 #endif
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//function to return a reaction time
+int
+measure_time(void)
+{
+	latch = 1;
+	//SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
+	while (latch == 1 && i < 4000)
+	{
+		i = i + 1;
+		OSA_TimeDelay(1);
+		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+		{
+			latch = 0;
+			//SEGGER_RTT_printf(0, "\r\tOff board pressed\n");
+		}
+//				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
+//				{
+//					OSA_TimeDelay(200);
+//					SEGGER_RTT_printf(0, "\r\tOff 0\n");
+//					//latch = 0;
+//				}
+//				SEGGER_RTT_printf(0, "%d", i);
+	}
+	time_count = 2*i;
+	//SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
+	
+	return time_count;
+}
+
+
+
+
+
 
 int
 main(void)
@@ -1359,6 +1394,9 @@ main(void)
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	devSSD1331init();
 	int time_count = 0;
+	int t1;
+	int t2;
+	int t3;
 	while (1)
 	{
 		int latch = 0;
@@ -1372,12 +1410,32 @@ main(void)
 		OSA_TimeDelay(2000);
 		
 		devSSD1331SEGMENT(10);
+		t1 = measure_time();
+		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t1);
+		OSA_TimeDelay(2000);
 		
+		devSSD1331SEGMENT(10);
+		t2 = measure_time();
+		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t2);
+		OSA_TimeDelay(2000);
+		
+		devSSD1331SEGMENT(10);
+		t3 = measure_time();
+		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t3);
+		
+
+		OSA_TimeDelay(2000);
+//
+		//}
+		
+		
+		
+/*		
 		//if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
 		//{
 			latch = 1;
 			//SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
-			while (latch == 1 && i < 10000)
+			while (latch == 1 && i < 4000)
 			{
 				i = i + 1;
 				OSA_TimeDelay(1);
@@ -1396,13 +1454,7 @@ main(void)
 			}
 			time_count = 2*i;
 			SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
-		OSA_TimeDelay(2000);
-//
-		//}
-		
-		
-		
-		
+*/	
 		
 		/*
 		uint16_t	readSensorRegisterValueLSB;
@@ -2663,7 +2715,6 @@ main(void)
 
 	return 0;
 }
-
 
 
 void
