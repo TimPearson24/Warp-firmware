@@ -1406,15 +1406,17 @@ main(void)
 //			{
 				if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 				{
-					//i = i + 1;
+					i = i + 1;
+					OSA_TimeDelay(200);
 					SEGGER_RTT_printf(0, "\r\tOff 1\n");
 				}
 				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
 				{
+					OSA_TimeDelay(200);
 					SEGGER_RTT_printf(0, "\r\tOff 0\n");
 					//latch = 0;
 				}
-				//SEGGER_RTT_printf(0, "%d", i);
+				SEGGER_RTT_printf(0, "%d", i);
 //			}	
 //
 		}
