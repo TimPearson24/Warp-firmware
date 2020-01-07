@@ -661,3 +661,24 @@ devSSD1331_graph(void)
 	return 0;
 }
 
+
+
+int
+devSSD1331_0_20(void)
+{
+	writeCommand(0x22);
+	writeCommand(0x2C);
+	writeCommand(0x05);
+	writeCommand(0x30);
+	writeCommand(0x38);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	
+	return 0;
+}
+
+
