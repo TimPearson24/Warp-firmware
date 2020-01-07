@@ -70,12 +70,13 @@ gpio_output_pin_user_config_t	outputPins[] = {
 		.config.slewRate = kPortSlowSlewRate,
 		.config.driveStrength = kPortLowDriveStrength,
 	},
-	{
-		.pinName = kWarpPinTPS82740_VSEL3,
-		.config.outputLogic = 1,
-		.config.slewRate = kPortSlowSlewRate,
-		.config.driveStrength = kPortLowDriveStrength,
-	},
+//Move this pin from an output pin to an input pin for the on board PTM
+//	{
+//		.pinName = kWarpPinTPS82740_VSEL3,
+//		.config.outputLogic = 1,
+//		.config.slewRate = kPortSlowSlewRate,
+//		.config.driveStrength = kPortLowDriveStrength,
+//	},
 	{
 		.pinName = kWarpPinTS5A3154_IN,				/*	Was kWarpPinUnusedPTB6 in Warp v2			*/
 		.config.outputLogic = 1,
@@ -231,6 +232,15 @@ gpio_input_pin_user_config_t	inputPins[] = {
 		.config.isPassiveFilterEnabled = false,
 		.config.interrupt = kPortIntDisabled,
 	},
+
+	//PTB5 - FOR THE ONBOARD SWITCH (ACTIVE LOW)
+	{
+                .pinName = kWarpPinTPS82740_VSEL3,
+                .config.isPullEnable = false,
+                .config.pullSelect = kPortPullUp,
+                .config.isPassiveFilterEnabled = false,
+                .config.interrupt = kPortIntDisabled,
+        },
 	{
 		.pinName = GPIO_PINS_OUT_OF_RANGE,
 	}
