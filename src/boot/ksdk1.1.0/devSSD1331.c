@@ -152,17 +152,17 @@ devSSD1331init(void)
 	
 	//The screen is filled with RED to tell the user that the initilisation sequence has been completed
 
-	writeCommand(0x22);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0x5F);
-	writeCommand(0x3F);
-	writeCommand(0xFF);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0xFF);
-	writeCommand(0x00);
-	writeCommand(0x00);
+	writeCommand(0x22);	//draw rectangle command
+	writeCommand(0x00);	//column address start
+	writeCommand(0x00);	//row address start
+	writeCommand(0x5F);	//column address end
+	writeCommand(0x3F);	//row address end	
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x00);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0x00);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x00);	//colour B of fill
+	writeCommand(0x00);	//colour A of fill
 	OSA_TimeDelay(1000);
 
 
@@ -232,17 +232,37 @@ devSSD1331_flash(int flash_period)
 int
 devSSD1331_graph(void)
 {
-	writeCommand(0x22);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0x5F);
-	writeCommand(0x3F);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0xFF);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0xFF);
+	//draw y axis line
+	writeCommand(0x21);	//line command
+	writeCommand(0x01);	//column start
+	writeCommand(0x01);	//row start
+	writeCommand(0x01);	//column end
+	writeCommand(0x36);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	//draw x axis line
+	writeCommand(0x21);	//line command
+	writeCommand(0x01);	//column start
+	writeCommand(0x36);	//row start
+	writeCommand(0x5E);	//column end
+	writeCommand(0x36);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	return 0;
+}
+
+int
+devSSD1331_clearscreen(void)
+{
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
 	
 	return 0;
 }
