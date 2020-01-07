@@ -196,8 +196,14 @@ devSSD1331init(void)
 
 //function to generate a white flash on the OLED screen
 int
-devSSD1331SEGMENT(int flash_period)
+devSSD1331_flash(int flash_period)
 {
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
 	writeCommand(0x22);
 	writeCommand(0x00);
 	writeCommand(0x00);
@@ -217,6 +223,26 @@ devSSD1331SEGMENT(int flash_period)
         writeCommand(0x00);
         writeCommand(0x5F);
         writeCommand(0x3F);
+	
+	return 0;
+}
+
+
+
+int
+devSSD1331_graph(void)
+{
+	writeCommand(0x22);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0xFF);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0xFF);
 	
 	return 0;
 }
