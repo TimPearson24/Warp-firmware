@@ -1033,7 +1033,7 @@ measure_time(void)
 	latch = 1;
 	int i = 0;
 	//SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
-	while (latch == 1 && i < 4000)
+	while (latch == 1 && i < 1500)
 	{
 		i = i + 1;
 		OSA_TimeDelay(1);
@@ -1402,6 +1402,7 @@ main(void)
 	int t1;
 	int t2;
 	int t3;
+	int average_time;
 	while (1)
 	{
 		int latch = 0;
@@ -1414,21 +1415,33 @@ main(void)
 		SEGGER_RTT_printf(0, "\r\tPrepare for flash\n");
 		OSA_TimeDelay(2000);
 		
-		devSSD1331SEGMENT(10);
+		devSSD1331_flash(10);
 		t1 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t1);
 		OSA_TimeDelay(2000);
 		
-		devSSD1331SEGMENT(10);
+		devSSD1331_flash(10);
 		t2 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t2);
 		OSA_TimeDelay(2000);
 		
-		devSSD1331SEGMENT(10);
+		devSSD1331_flash(10);
 		t3 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t3);
 		
-
+		average_time = (t1 + t2 + t3)/3;
+		
+		OSA_TimeDelay(1000);
+		
+		SEGGER_RTT_printf(0, "\r\tAverage time = %d ms\n", average_time);
+		
+		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
+		{
+			devSSD1331_graph();
+		}
+		
+		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
+		
 		OSA_TimeDelay(2000);
 //
 		//}
