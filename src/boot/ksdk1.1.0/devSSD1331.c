@@ -149,6 +149,30 @@ devSSD1331init(void)
 	writeCommand(0x00);
 	writeCommand(0x5F);
 	writeCommand(0x3F);
+	
+	//The screen is filled with RED to tell the user that the initilisation sequence has been completed
+
+	writeCommand(0x22);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0xFF);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	OSA_TimeDelay(1000);
+
+
+	//Clear Screen Again
+
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
 
 
 
