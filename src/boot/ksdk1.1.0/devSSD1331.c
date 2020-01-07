@@ -623,43 +623,40 @@ devSSD1331_graph(void)
 	writeCommand(0xFF);	//blue colour
 		//0 (ones)
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x59);	//column start
+	writeCommand(0x00+0x5D);	//column start
 	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x59);	//column end
+	writeCommand(0x00+0x5D);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x59);	//column start
+	writeCommand(0x02+0x5D);	//column start
 	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x59);	//column end
+	writeCommand(0x02+0x5D);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x01+0x5D);	//column start
 	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x01+0x5D);	//column end
 	writeCommand(0x3B);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x59);	//column start
+	writeCommand(0x01+0x5D);	//column start
 	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x59);	//column end
+	writeCommand(0x01+0x5D);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
-	
-	
-	
 	
 	return 0;
 }
