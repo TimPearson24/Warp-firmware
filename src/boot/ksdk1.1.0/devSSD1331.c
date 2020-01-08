@@ -249,7 +249,6 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	int t_indicator[16] = {0};
 	int growth_step = 0x10; //number of pixels grown per unit of frequency
 	int max_bar_height = 0x38;
-	int max_growth_steps = 0x38/growth_step;	//no. of steps the bar can increase before reaching the top of the screen
 	
 	//create local array of the time bins
 	for(int x = 0; x < size; x ++)
@@ -265,7 +264,12 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 		time_bin ++;
     	}
 	
-	// create local array which will indicate which time bin has been changed
+	/* create local array which will indicate which time bin has been changed 
+	* This is an array of 1's with one 0 value corresponding to the bin that has changed
+	* Later, the indicator is used as a multiplier for the colour of the bar generated
+	* If the multiplier is 0 (ie the bin has changed) this bar's red and blue colours are zeroed out by the multiplier, 
+	* leaving a green bar surrounded by white bars.
+	*/
 	for(int x = 0; x < size; x ++)
     	{
 		t_indicator[x] = *time_bin_indicator;
@@ -283,54 +287,39 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 		}			
     	}
 	
+
 	/*
-	* The following code will halve the size of the graph if the largest bar reaches the top of the OLED screen
-	* It does this by halving the number of pixels per frequency unit
-	
-	int divisor;
-	if(max_value > max_growth_steps)
-	{
-		divisor = 2;
-		int n = max_value/max_growth_steps;	//this is the exponent for the divisor
-		for (int i = 0; i < n-1; i ++)		//self made power function as no such thing in c code
-		{		
-       			divisor *= 2;
-		}
-	}
-	else
-	{
-		divisor = 1;
-	}
-	growth_step = growth_step/divisor;	//make the growth step smaller
+	* The following code is used to scale the results when the highest bar hits the top of the OLED screen
+	* It does this by adjusting the number of pixels in each growth step depending on the maximum value in the time array
+	*The height of the chart is 56 pixels (0x38)
+	*The first growth step is 16 pixels (0x10)
 	*/
-	
-	int scale = max_bar_height/max_value;
-	
+	int scale = max_bar_height/max_value;	//divide the max height of the chart (56 pixels) by the maximum value in the time array
 	switch(scale)
 	{
-		case 0x10 ... 0x38:
+		case 0x10 ... 0x38:		//result is between 16 and 56
 		{
-			growth_step = 0x10;
+			growth_step = 0x10;	//set growth step to 16
+			break;	
+		}
+		case 0x08 ... 0x0F:		//result is between 8 and 16
+		{
+			growth_step = 0x08;	//set growth step to 8
 			break;
 		}
-		case 0x08 ... 0x0F:
+		case 0x04 ... 0x07:		//result is between 4 and 8
 		{
-			growth_step = 0x08;
+			growth_step = 0x04;	//set growth step to 4
 			break;
 		}
-		case 0x04 ... 0x07:
+		case 0x02 ... 0x03:		//result is between 2 and 4
 		{
-			growth_step = 0x04;
-			break;
-		}
-		case 0x02 ... 0x03:
-		{
-			growth_step = 0x02;
+			growth_step = 0x02;	//set growth step to 2
 			break;
 		}			
-		case 0x00 ... 0x01:
+		case 0x00 ... 0x01:		//result is between 0 and 2
 		{
-			growth_step = 0x01;
+			growth_step = 0x01;	//set growth to 1
 			break;
 		}
 		default:
