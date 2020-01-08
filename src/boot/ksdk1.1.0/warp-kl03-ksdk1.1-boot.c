@@ -1426,6 +1426,8 @@ main(void)
 		int latch = 0;
 		int i = 0;
 		
+		int time_bin_indicator[16] = {1};
+		
 		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
 		enableI2Cpins(menuI2cPullupValue);
 		//printSensorDataINA219();
@@ -1457,7 +1459,7 @@ main(void)
 		{
 				case 0 ... 19:
 				{
-					//t0_19 ++;
+					time_bin_indicator[0] = 0;
 					time_array[0] ++;
 					SEGGER_RTT_printf(0, "\r\t0 - 19 = %d\n", time_array[0]);
 					break;
@@ -1465,7 +1467,7 @@ main(void)
 
 				case 20 ... 39:
 				{
-					//t20_39 ++;
+					time_bin_indicator[0] = 0;
 					time_array[1] ++;
 					SEGGER_RTT_printf(0, "\r\t20 - 39 = %d\n", time_array[1]);
 					break;
@@ -1473,7 +1475,7 @@ main(void)
 				
 				case 40 ... 59:
 				{
-					//t40_59 ++;
+					time_bin_indicator[0] = 0;
 					time_array[2] ++;
 					SEGGER_RTT_printf(0, "\r\t40 - 59 = %d\n", time_array[2]);
 					break;
@@ -1481,7 +1483,7 @@ main(void)
 
 				case 60 ... 79:
 				{
-					//t60_79 ++;
+					time_bin_indicator[0] = 0;
 					time_array[3] ++;
 					SEGGER_RTT_printf(0, "\r\t60 - 79 = %d\n", time_array[3]);
 					break;
@@ -1489,7 +1491,7 @@ main(void)
 
 				case 80 ... 99:
 				{
-					//t80_99 ++;
+					time_bin_indicator[0] = 0;
 					time_array[4] ++;
 					SEGGER_RTT_printf(0, "\r\t80 - 99 = %d\n", time_array[4]);
 					break;
@@ -1497,7 +1499,7 @@ main(void)
 				
 				case 100 ... 119:
 				{
-					//t100_119 ++;
+					time_bin_indicator[0] = 0;
 					time_array[5] ++;
 					SEGGER_RTT_printf(0, "\r\t100 - 119 = %d\n", time_array[5]);
 					break;
@@ -1505,7 +1507,7 @@ main(void)
 
 				case 120 ... 139:
 				{
-					//t120_139 ++;
+					time_bin_indicator[0] = 0;
 					time_array[6] ++;
 					SEGGER_RTT_printf(0, "\r\t120 - 139 = %d\n", time_array[6]);
 					break;
@@ -1513,7 +1515,7 @@ main(void)
 				
 				case 140 ... 159:
 				{
-					//t140_159 ++;
+					time_bin_indicator[0] = 0;
 					time_array[7] ++;
 					SEGGER_RTT_printf(0, "\r\t140 - 159 = %d\n", time_array[7]);
 					break;
@@ -1521,7 +1523,7 @@ main(void)
 
 				case 160 ... 179:
 				{
-					//t160_179 ++;
+					time_bin_indicator[0] = 0;
 					time_array[8] ++;
 					SEGGER_RTT_printf(0, "\r\t160 - 179 = %d\n", time_array[8]);
 					break;
@@ -1529,7 +1531,7 @@ main(void)
 
 				case 180 ... 199:
 				{
-					//t180_199 ++;
+					time_bin_indicator[0] = 0;
 					time_array[9] ++;
 					SEGGER_RTT_printf(0, "\r\t180 - 199 = %d\n", time_array[9]);
 					break;
@@ -1537,7 +1539,7 @@ main(void)
 				
 				case 200 ... 219:
 				{
-					//t200_219 ++;
+					time_bin_indicator[0] = 0;
 					time_array[10] ++;
 					SEGGER_RTT_printf(0, "\r\t200 - 219 = %d\n", time_array[10]);
 					break;
@@ -1545,7 +1547,7 @@ main(void)
 
 				case 220 ... 239:
 				{
-					//t220_239 ++;
+					time_bin_indicator[0] = 0;
 					time_array[11] ++;
 					SEGGER_RTT_printf(0, "\r\t220 - 239 = %d\n", time_array[11]);
 					break;
@@ -1553,7 +1555,7 @@ main(void)
 				
 				case 240 ... 259:
 				{
-					//t240_259 ++;
+					time_bin_indicator[0] = 0;
 					time_array[12] ++;
 					SEGGER_RTT_printf(0, "\r\t240 - 259 = %d\n", time_array[12]);
 					break;
@@ -1561,7 +1563,7 @@ main(void)
 
 				case 260 ... 279:
 				{
-					//t260_279 ++;
+					time_bin_indicator[0] = 0;
 					time_array[13] ++;
 					SEGGER_RTT_printf(0, "\r\t260 - 279 = %d\n", time_array[13]);
 					break;
@@ -1569,7 +1571,7 @@ main(void)
 
 				case 280 ... 299:
 				{
-					//t280_299 ++;
+					time_bin_indicator[0] = 0;
 					time_array[14] ++;
 					SEGGER_RTT_printf(0, "\r\t280 - 299 = %d\n", time_array[14]);
 					break;
@@ -1577,7 +1579,7 @@ main(void)
 				
 				case 300 ... 3000:
 				{
-					//t300_plus ++;
+					time_bin_indicator[0] = 0;
 					time_array[15] ++;
 					SEGGER_RTT_printf(0, "\r\t300 plus = %d\n", time_array[15]);
 					break;
@@ -1589,14 +1591,14 @@ main(void)
 					break;
 				}
 		}
-		SEGGER_RTT_printf(0, "\r\n\t%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
+		SEGGER_RTT_printf(0, "\r\n\t0-19 = %d, 20-39 = %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
 		//SEGGER_RTT_printf(0, "\r\t%d\n", time_array[15]);
 		
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
 			devSSD1331_axes();
-			devSSD1331_bars(time_array, 15);
+			devSSD1331_bars(time_array, time_bin_indicator, 15);
 			//devSSD1331_0_20();
 		}
 		
