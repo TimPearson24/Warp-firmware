@@ -1403,7 +1403,7 @@ main(void)
 	int t2;
 	int t3;
 	int average_time;
-	int time_array[15] = {0};
+	int time_array[16] = {0};
 /*	int t0_19 = 0;
 	int t20_39 = 0;
 	int t40_59 = 0;
