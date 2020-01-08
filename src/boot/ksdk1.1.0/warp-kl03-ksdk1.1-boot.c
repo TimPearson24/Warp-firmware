@@ -1403,6 +1403,24 @@ main(void)
 	int t2;
 	int t3;
 	int average_time;
+	int time_array[15] = {0};
+/*	int t0_19 = 0;
+	int t20_39 = 0;
+	int t40_59 = 0;
+	int t60_79 = 0;
+	int t80_99 = 0;
+	int t100_119 = 0;
+	int t120_139 = 0;
+	int t140_159 = 0;
+	int t160_179 = 0;
+	int t180_199 = 0;
+	int t200_219 = 0;
+	int t220_239 = 0;
+	int t240_259 = 0;
+	int t260_279 = 0;
+	int t280_299 = 0;
+	int t300_plus = 0;
+*/	
 	while (1)
 	{
 		int latch = 0;
@@ -1437,25 +1455,142 @@ main(void)
 		
 		switch(average_time)
 		{
-				case 0 ... 150:
+				case 0 ... 19:
 				{
-					SEGGER_RTT_printf(0, "\r\tLess than 150\n");
+					//t0_19 ++;
+					time_array[0] ++;
+					SEGGER_RTT_printf(0, "\r\t0 - 19 = %d\n", time_array[0]);
 					break;
 				}
 
-				case 151 ... 300:
+				case 20 ... 39:
 				{
-					SEGGER_RTT_printf(0, "\r\tGreater than 150\n");
+					//t20_39 ++;
+					time_array[1] ++;
+					SEGGER_RTT_printf(0, "\r\t20 - 39 = %d\n", time_array[1]);
+					break;
+				}
+				
+				case 40 ... 59:
+				{
+					//t40_59 ++;
+					time_array[2] ++;
+					SEGGER_RTT_printf(0, "\r\t40 - 59 = %d\n", time_array[2]);
 					break;
 				}
 
+				case 60 ... 79:
+				{
+					//t60_79 ++;
+					time_array[3] ++;
+					SEGGER_RTT_printf(0, "\r\t60 - 79 = %d\n", time_array[3]);
+					break;
+				}
+
+				case 80 ... 99:
+				{
+					//t80_99 ++;
+					time_array[4] ++;
+					SEGGER_RTT_printf(0, "\r\t80 - 99 = %d\n", time_array[4]);
+					break;
+				}
+				
+				case 100 ... 119:
+				{
+					//t100_119 ++;
+					time_array[5] ++;
+					SEGGER_RTT_printf(0, "\r\t100 - 119 = %d\n", time_array[5]);
+					break;
+				}
+
+				case 120 ... 139:
+				{
+					//t120_139 ++;
+					time_array[6] ++;
+					SEGGER_RTT_printf(0, "\r\t120 - 139 = %d\n", time_array[6]);
+					break;
+				}
+				
+				case 140 ... 159:
+				{
+					//t140_159 ++;
+					time_array[7] ++;
+					SEGGER_RTT_printf(0, "\r\t140 - 159 = %d\n", time_array[7]);
+					break;
+				}
+
+				case 160 ... 179:
+				{
+					//t160_179 ++;
+					time_array[8] ++;
+					SEGGER_RTT_printf(0, "\r\t160 - 179 = %d\n", time_array[8]);
+					break;
+				}
+
+				case 180 ... 199:
+				{
+					//t180_199 ++;
+					time_array[9] ++;
+					SEGGER_RTT_printf(0, "\r\t180 - 199 = %d\n", time_array[9]);
+					break;
+				}
+				
+				case 200 ... 219:
+				{
+					//t200_219 ++;
+					time_array[10] ++;
+					SEGGER_RTT_printf(0, "\r\t200 - 219 = %d\n", time_array[10]);
+					break;
+				}
+
+				case 220 ... 239:
+				{
+					//t220_239 ++;
+					time_array[11] ++;
+					SEGGER_RTT_printf(0, "\r\t220 - 239 = %d\n", time_array[11]);
+					break;
+				}
+				
+				case 240 ... 259:
+				{
+					//t240_259 ++;
+					time_array[12] ++;
+					SEGGER_RTT_printf(0, "\r\t240 - 259 = %d\n", time_array[12]);
+					break;
+				}
+
+				case 260 ... 279:
+				{
+					//t260_279 ++;
+					time_array[13] ++;
+					SEGGER_RTT_printf(0, "\r\t260 - 279 = %d\n", time_array[13]);
+					break;
+				}
+
+				case 280 ... 299:
+				{
+					//t280_299 ++;
+					time_array[14] ++;
+					SEGGER_RTT_printf(0, "\r\t280 - 299 = %d\n", time_array[14]);
+					break;
+				}
+				
+				case 300 ... 3000:
+				{
+					//t300_plus ++;
+					time_array[15] ++;
+					SEGGER_RTT_printf(0, "\r\t300 plus = %d\n", time_array[15]);
+					break;
+				}
+	
 				default:
 				{
-					SEGGER_RTT_printf(0, "\r\tGreater than 300\n");
+					SEGGER_RTT_printf(0, "\r\tThis shouldn't happen\n");
 					break;
 				}
 		}
-		
+		SEGGER_RTT_printf(0, "\r\n\t%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
+		//SEGGER_RTT_printf(0, "\r\t%d\n", time_array[15]);
 		
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
