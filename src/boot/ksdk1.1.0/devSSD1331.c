@@ -254,7 +254,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	int t_array[16] = {0};
 	int t_indicator[16] = {0};
 	
-	for(int x = 0; x < size; x ++)
+	for(int x = 0; x < size + 1; x ++)
     	{
 		t_array[x] = *time_bin;
 		/*increment pointer for next element fetch*/
@@ -923,6 +923,18 @@ devSSD1331_countdown(void)
 	writeCommand(0xFF);	//colour A of fill
 	
 	writeCommand(0x22);	//rectangle command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
 	writeCommand(0x20);	//column start
 	writeCommand(0x1F);	//row start
 	writeCommand(0x3F);	//column end
@@ -937,18 +949,6 @@ devSSD1331_countdown(void)
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x20);	//column start
 	writeCommand(0x3D);	//row start
-	writeCommand(0x3F);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
-	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
-	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
-	writeCommand(0xFF);	//colour C of fill
-	writeCommand(0x3F);	//colour B of fill
-	writeCommand(0xFF);	//colour A of fill
-	
-	writeCommand(0x22);	//rectangle command
-	writeCommand(0x3D);	//column start
-	writeCommand(0x00);	//row start
 	writeCommand(0x3F);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
@@ -982,30 +982,6 @@ devSSD1331_countdown(void)
 	writeCommand(0xFF);	//colour A of fill
 	
 	writeCommand(0x22);	//rectangle command
-	writeCommand(0x20);	//column start
-	writeCommand(0x1F);	//row start
-	writeCommand(0x3F);	//column end
-	writeCommand(0x21);	//row end
-	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
-	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
-	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
-	writeCommand(0xFF);	//colour C of fill
-	writeCommand(0x3F);	//colour B of fill
-	writeCommand(0xFF);	//colour A of fill
-	
-	writeCommand(0x22);	//rectangle command
-	writeCommand(0x20);	//column start
-	writeCommand(0x3D);	//row start
-	writeCommand(0x3F);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
-	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
-	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
-	writeCommand(0xFF);	//colour C of fill
-	writeCommand(0x3F);	//colour B of fill
-	writeCommand(0xFF);	//colour A of fill
-	
-	writeCommand(0x22);	//rectangle command
 	writeCommand(0x3D);	//column start
 	writeCommand(0x00);	//row start
 	writeCommand(0x3F);	//column end
@@ -1019,8 +995,32 @@ devSSD1331_countdown(void)
 	
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x20);	//column start
+	writeCommand(0x1F);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x21);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
 	writeCommand(0x20);	//row start
 	writeCommand(0x22);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x3F);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
 	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
