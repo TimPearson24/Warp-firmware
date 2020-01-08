@@ -241,9 +241,37 @@ devSSD1331_clearscreen(void)
 
 
 
+//function to generate and manipulate bars
+/*int
+devSSD1331_bars(int bin)
+{
+	
+	writeCommand(0x22);
+	writeCommand(0x00);
+	writeCommand(0x00);
+	writeCommand(0x5F);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	writeCommand(0xFF);
+	writeCommand(0x3F);
+	writeCommand(0xFF);
+	
+	OSA_TimeDelay(flash_period);
+	
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
+	return 0;
+}
+*/
 
 int
-devSSD1331_graph(void)
+devSSD1331_axes(void)
 {
 	//draw y axis line
 	writeCommand(0x21);	//line command
