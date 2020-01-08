@@ -1419,17 +1419,17 @@ main(void)
 		
 		SEGGER_RTT_printf(0, "\r\tPrepare for flash\n");
 		devSSD1331_countdown();
-		OSA_TimeDelay(2000);
+		OSA_TimeDelay(1500);
 		
 		devSSD1331_flash(10);
 		t1 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t1);
-		OSA_TimeDelay(2000);
+		OSA_TimeDelay(2500);
 		
 		devSSD1331_flash(10);
 		t2 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t2);
-		OSA_TimeDelay(2000);
+		OSA_TimeDelay(1700);
 		
 		devSSD1331_flash(10);
 		t3 = measure_time();
@@ -1581,12 +1581,17 @@ main(void)
 		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
 		SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
 
+		devSSD1331_axes();
+		devSSD1331_bars(time_array, time_bin_indicator, 15);
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
-			devSSD1331_axes();
-			devSSD1331_bars(time_array, time_bin_indicator, 15);
-			//devSSD1331_0_20();
+			//hold position in code until button is pressed
+			
+			//if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) != 0)
+			//{
+				
+			//}
 		}
 		
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
