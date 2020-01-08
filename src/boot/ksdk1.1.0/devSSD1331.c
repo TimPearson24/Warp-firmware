@@ -254,7 +254,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	int t_array[16] = {0};
 	int t_indicator[16] = {0};
 	
-	for(int x = 0; x < size + 1; x ++)
+	for(int x = 0; x < size; x ++)
     	{
 		t_array[x] = *time_bin;
 		/*increment pointer for next element fetch*/
