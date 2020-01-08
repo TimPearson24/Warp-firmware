@@ -1404,23 +1404,6 @@ main(void)
 	int t3;
 	int average_time;
 	int time_array[16] = {0};
-/*	int t0_19 = 0;
-	int t20_39 = 0;
-	int t40_59 = 0;
-	int t60_79 = 0;
-	int t80_99 = 0;
-	int t100_119 = 0;
-	int t120_139 = 0;
-	int t140_159 = 0;
-	int t160_179 = 0;
-	int t180_199 = 0;
-	int t200_219 = 0;
-	int t220_239 = 0;
-	int t240_259 = 0;
-	int t260_279 = 0;
-	int t280_299 = 0;
-	int t300_plus = 0;
-*/	
 	while (1)
 	{
 		int latch = 0;
@@ -1435,6 +1418,7 @@ main(void)
 		//printSensorDataINA219();
 		
 		SEGGER_RTT_printf(0, "\r\tPrepare for flash\n");
+		devSSD1331_countdown();
 		OSA_TimeDelay(2000);
 		
 		devSSD1331_flash(10);
