@@ -247,7 +247,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 {	
 	int t_array[16] = {0};
 	int t_indicator[16] = {0};
-	int growth_step = 0x30; //number of pixels grown
+	int growth_step = 0x0A; //number of pixels grown
 	int max_growth_steps = 0x38/growth_step;	//no. of steps the bar can increase before reaching the top of the screen
 	
 	//create local array of the time bins
