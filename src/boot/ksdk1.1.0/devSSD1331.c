@@ -248,6 +248,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	int t_array[16] = {0};
 	int t_indicator[16] = {0};
 	int growth_step = 0x10; //number of pixels grown per unit of frequency
+	int max_bar_height = 0x38;
 	int max_growth_steps = 0x38/growth_step;	//no. of steps the bar can increase before reaching the top of the screen
 	
 	//create local array of the time bins
@@ -285,20 +286,59 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	/*
 	* The following code will halve the size of the graph if the largest bar reaches the top of the OLED screen
 	* It does this by halving the number of pixels per frequency unit
-	*/
+	
+	int divisor;
 	if(max_value > max_growth_steps)
 	{
-		int divisor = 2;
+		divisor = 2;
 		int n = max_value/max_growth_steps;	//this is the exponent for the divisor
 		for (int i = 0; i < n-1; i ++)		//self made power function as no such thing in c code
 		{		
        			divisor *= 2;
 		}
-		growth_step = growth_step/divisor;	//make the growth step smaller
 	}
-		
+	else
+	{
+		divisor = 1;
+	}
+	growth_step = growth_step/divisor;	//make the growth step smaller
+	*/
 	
+	int scale = max_bar_height/max_value;
 	
+	switch(scale)
+	{
+		case 0x10 ... 0x38:
+		{
+			growth_step = 0x10;
+			break;
+		}
+		case 0x08 ... 0x0F:
+		{
+			growth_step = 0x08;
+			break;
+		}
+		case 0x04 ... 0x07:
+		{
+			growth_step = 0x04;
+			break;
+		}
+		case 0x02 ... 0x03:
+		{
+			growth_step = 0x02;
+			break;
+		}			
+		case 0x00 ... 0x01:
+		{
+			growth_step = 0x01;
+			break;
+		}
+		default:
+		{
+			growth_step = 0x01;
+			break;
+		}
+	}
 	
 	//0-19 bin 0
 	writeCommand(0x22);	//rectangle command
