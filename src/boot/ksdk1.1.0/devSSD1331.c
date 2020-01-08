@@ -261,19 +261,213 @@ devSSD1331_bars(int *time_bin, int size)
     	}
 	
 	
+	//0-19 bin 0
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x02);	//column start
+	writeCommand(0x38 - (0x06 * t_array[0]));	//row start
+	writeCommand(0x06);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
 	
-	writeCommand(0x22);
-	writeCommand(0x2C);
-	writeCommand(0x38 - (0x09 * t_array[10]));
-	writeCommand(0x30);
-	writeCommand(0x38);
-	writeCommand(0xFF);
-	writeCommand(0x3F);
-	writeCommand(0xFF);
-	writeCommand(0xFF);
-	writeCommand(0x3F);
-	writeCommand(0xFF);
+	//20-39 bin 1
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x08);	//column start
+	writeCommand(0x38 - (0x06 * t_array[1]));	//row start
+	writeCommand(0x0C);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//40-59 bin 2
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x0E);	//column start
+	writeCommand(0x38 - (0x06 * t_array[2]));	//row start
+	writeCommand(0x12);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//60-79 bin 3
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x14);	//column start
+	writeCommand(0x38 - (0x06 * t_array[3]));	//row start
+	writeCommand(0x18);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//80-99 bin 4
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x1A);	//column start
+	writeCommand(0x38 - (0x06 * t_array[4]));	//row start
+	writeCommand(0x1E);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//100-119 bin 5
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x38 - (0x06 * t_array[5]));	//row start
+	writeCommand(0x24);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//120-139 bin 6
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x26);	//column start
+	writeCommand(0x38 - (0x06 * t_array[6]));	//row start
+	writeCommand(0x2A);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//140-159 bin 7
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x2C);	//column start
+	writeCommand(0x38 - (0x06 * t_array[7]));	//row start
+	writeCommand(0x30);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//160-179 bin 8
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x32);	//column start
+	writeCommand(0x38 - (0x06 * t_array[8]));	//row start
+	writeCommand(0x36);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//180-199 bin 9
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x38);	//column start
+	writeCommand(0x38 - (0x06 * t_array[9]));	//row start
+	writeCommand(0x3C);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//200-219 bin 10
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x3E);	//column start
+	writeCommand(0x38 - (0x06 * t_array[10]));	//row start
+	writeCommand(0x42);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
 
+	//220-239 bin 11
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x44);	//column start
+	writeCommand(0x38 - (0x06 * t_array[11]));	//row start
+	writeCommand(0x48);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//240-259 bin 12
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x4A);	//column start
+	writeCommand(0x38 - (0x06 * t_array[12]));	//row start
+	writeCommand(0x4E);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//260-279 bin 13
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x50);	//column start
+	writeCommand(0x38 - (0x06 * t_array[13]));	//row start
+	writeCommand(0x54);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//280-299 bin 14
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x50);	//column start
+	writeCommand(0x38 - (0x06 * t_array[14]));	//row start
+	writeCommand(0x54);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	//300+ bin 15
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x56);	//column start
+	writeCommand(0x38 - (0x06 * t_array[15]));	//row start
+	writeCommand(0x5F);	//column end
+	writeCommand(0x38);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
 	
 	return 0;
 }
