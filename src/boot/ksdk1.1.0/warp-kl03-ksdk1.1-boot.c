@@ -1594,7 +1594,7 @@ main(void)
 				//{
 				for(int x = 0; x < 16; x ++)
     				{
-					time_array[x] = 0
+					time_array[x] = 0;
 					/*Reset each time array entry to 0*/
     				}
 				SEGGER_RTT_printf(0, "\r\tCleared history\n");
