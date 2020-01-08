@@ -242,33 +242,42 @@ devSSD1331_clearscreen(void)
 
 
 //function to generate and manipulate bars
-/*int
-devSSD1331_bars(int bin)
-{
+int
+devSSD1331_bars(int *time_bin, int size)
+{	
+	/* The pointer time_bin is pointing to the first element of
+	 * the array and size is the size of the array. In the
+	 * loop we are incrementing pointer so that it points to
+	 * the next element of the array on each increment.
+	 *
+	 */
+	int t_array[15] = {0};
+	
+	for(int x = 0; x < size; x ++)
+    	{
+		t_array[x] = *time_bin
+		/*increment pointer for next element fetch*/
+		time_bin ++;
+    	}
+	
+	
 	
 	writeCommand(0x22);
-	writeCommand(0x00);
-	writeCommand(0x00);
-	writeCommand(0x5F);
-	writeCommand(0x3F);
+	writeCommand(0x2C);
+	writeCommand(0x38 - (0x09 * t_array[10]));
+	writeCommand(0x30);
+	writeCommand(0x38);
 	writeCommand(0xFF);
 	writeCommand(0x3F);
 	writeCommand(0xFF);
 	writeCommand(0xFF);
 	writeCommand(0x3F);
 	writeCommand(0xFF);
-	
-	OSA_TimeDelay(flash_period);
-	
-	writeCommand(kSSD1331CommandCLEAR);
-        writeCommand(0x00);
-        writeCommand(0x00);
-        writeCommand(0x5F);
-        writeCommand(0x3F);
+
 	
 	return 0;
 }
-*/
+
 
 int
 devSSD1331_axes(void)
