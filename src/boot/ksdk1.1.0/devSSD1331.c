@@ -245,22 +245,26 @@ devSSD1331_clearscreen(void)
 int
 devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 {	
-	/* The pointer time_bin is pointing to the first element of
-	 * the array and size is the size of the array. In the
-	 * loop we are incrementing pointer so that it points to
-	 * the next element of the array on each increment.
-	 *
-	 */
 	int t_array[16] = {0};
 	int t_indicator[16] = {0};
+	int growth_step = 0x30; //number of pixels grown
+	int max_growth_steps = 0x38/growth_step;	//no. of steps the bar can increase before reaching the top of the screen
 	
+	//create local array of the time bins
 	for(int x = 0; x < size; x ++)
     	{
+		/* The pointer time_bin is pointing to the first element of
+		 * the array and size is the size of the array. In the
+		 * loop we are incrementing pointer so that it points to
+		 * the next element of the array on each increment.
+		 *
+		 */
 		t_array[x] = *time_bin;
 		/*increment pointer for next element fetch*/
 		time_bin ++;
     	}
 	
+	// create local array which will indicate which time bin has been changed
 	for(int x = 0; x < size; x ++)
     	{
 		t_indicator[x] = *time_bin_indicator;
@@ -268,11 +272,36 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 		time_bin_indicator ++;
     	}
 	
+	//The following code goes through the time array to find the largest value and store it in max_value
+	int max_value = t_array[0];
+	for(int x = 0; x < size; x ++)
+    	{
+		if(t_array[x] > max_value)
+		{
+			max_value = t_array[x];
+		}			
+    	}
+	
+	/*
+	* The following code will halve the size of the graph if the largest bar reaches the top of the OLED screen
+	* It does this by halving the number of pixels per frequency unit
+	*/
+	if(max_value > max_growth_steps)
+	{
+		int divisor = 2;
+		n = max_value/max_growth_steps;
+		for (i = 0; i < n; i ++){		//self made power function as no such thing in c code
+       			divisor *= 2;
+		growth_step = growth_step/divisor;	//make the growth step smaller
+	}
+		
+	
+	
 	
 	//0-19 bin 0
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x02);	//column start
-	writeCommand(0x38 - (0x06 * t_array[0]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[0]));	//row start
 	writeCommand(0x06);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[0]);	//colour C (RED) of outline (max FF)
@@ -285,7 +314,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//20-39 bin 1
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x08);	//column start
-	writeCommand(0x38 - (0x06 * t_array[1]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[1]));	//row start
 	writeCommand(0x0C);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[1]);	//colour C (RED) of outline (max FF)
@@ -298,7 +327,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//40-59 bin 2
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x0E);	//column start
-	writeCommand(0x38 - (0x06 * t_array[2]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[2]));	//row start
 	writeCommand(0x12);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[2]);	//colour C (RED) of outline (max FF)
@@ -311,7 +340,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//60-79 bin 3
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x14);	//column start
-	writeCommand(0x38 - (0x06 * t_array[3]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[3]));	//row start
 	writeCommand(0x18);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[3]);	//colour C (RED) of outline (max FF)
@@ -324,7 +353,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//80-99 bin 4
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x1A);	//column start
-	writeCommand(0x38 - (0x06 * t_array[4]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[4]));	//row start
 	writeCommand(0x1E);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[4]);	//colour C (RED) of outline (max FF)
@@ -337,7 +366,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//100-119 bin 5
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x20);	//column start
-	writeCommand(0x38 - (0x06 * t_array[5]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[5]));	//row start
 	writeCommand(0x24);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[5]);	//colour C (RED) of outline (max FF)
@@ -350,7 +379,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//120-139 bin 6
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x26);	//column start
-	writeCommand(0x38 - (0x06 * t_array[6]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[6]));	//row start
 	writeCommand(0x2A);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[6]);	//colour C (RED) of outline (max FF)
@@ -363,7 +392,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//140-159 bin 7
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x2C);	//column start
-	writeCommand(0x38 - (0x06 * t_array[7]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[7]));	//row start
 	writeCommand(0x30);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[7]);	//colour C (RED) of outline (max FF)
@@ -376,7 +405,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//160-179 bin 8
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x32);	//column start
-	writeCommand(0x38 - (0x06 * t_array[8]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[8]));	//row start
 	writeCommand(0x36);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[8]);	//colour C (RED) of outline (max FF)
@@ -389,7 +418,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//180-199 bin 9
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x38);	//column start
-	writeCommand(0x38 - (0x06 * t_array[9]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[9]));	//row start
 	writeCommand(0x3C);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[9]);	//colour C (RED) of outline (max FF)
@@ -402,7 +431,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//200-219 bin 10
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x3E);	//column start
-	writeCommand(0x38 - (0x06 * t_array[10]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[10]));	//row start
 	writeCommand(0x42);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[10]);	//colour C (RED) of outline (max FF)
@@ -415,7 +444,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//220-239 bin 11
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x44);	//column start
-	writeCommand(0x38 - (0x06 * t_array[11]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[11]));	//row start
 	writeCommand(0x48);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[11]);	//colour C (RED) of outline (max FF)
@@ -428,7 +457,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//240-259 bin 12
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x4A);	//column start
-	writeCommand(0x38 - (0x06 * t_array[12]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[12]));	//row start
 	writeCommand(0x4E);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[12]);	//colour C (RED) of outline (max FF)
@@ -441,7 +470,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//260-279 bin 13
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x50);	//column start
-	writeCommand(0x38 - (0x06 * t_array[13]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[13]));	//row start
 	writeCommand(0x54);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[13]);	//colour C (RED) of outline (max FF)
@@ -454,7 +483,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//280-299 bin 14
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x56);	//column start
-	writeCommand(0x38 - (0x06 * t_array[14]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[14]));	//row start
 	writeCommand(0x5A);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF * t_indicator[14]);	//colour C (RED) of outline (max FF)
@@ -467,7 +496,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	//300+ bin 15
 	writeCommand(0x22);	//rectangle command
 	writeCommand(0x5C);	//column start
-	writeCommand(0x38 - (0x06 * t_array[15]));	//row start
+	writeCommand(0x38 - (growth_step * t_array[15]));	//row start
 	writeCommand(0x5F);	//column end
 	writeCommand(0x38);	//row end
 	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
