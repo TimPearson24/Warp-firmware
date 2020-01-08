@@ -1588,10 +1588,13 @@ main(void)
 		{
 			//hold position in code until button is pressed
 			
-			//if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) != 0)
-			//{
-				
-			//}
+			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) != 0)
+			{
+				if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
+				{
+					time_array[16] = {0};
+				}
+			}
 		}
 		
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
