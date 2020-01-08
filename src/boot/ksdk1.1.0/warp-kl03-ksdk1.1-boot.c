@@ -1426,7 +1426,7 @@ main(void)
 		int latch = 0;
 		int i = 0;
 		
-		int time_bin_indicator[16] = {1};
+		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 		SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
 
 		
