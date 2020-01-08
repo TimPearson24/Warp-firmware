@@ -470,12 +470,12 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	writeCommand(0x38 - (0x06 * t_array[15]));	//row start
 	writeCommand(0x5F);	//column end
 	writeCommand(0x38);	//row end
-	writeCommand(0xFF * t_indicator[15]);	//colour C (RED) of outline (max FF)
-	writeCommand(0x3F);			//colour B (GREEN) of outline (max 3F)
-	writeCommand(0xFF * t_indicator[15]);	//colour A (BLUE) of outline (max FF)
-	writeCommand(0xFF * t_indicator[15]);	//colour C of fill
-	writeCommand(0x3F);			//colour B of fill
-	writeCommand(0xFF * t_indicator[15]);	//colour A of fill
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x00);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0x00);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x00);	//colour B of fill
+	writeCommand(0x00);	//colour A of fill
 	
 	return 0;
 }
@@ -900,22 +900,167 @@ devSSD1331_axes(void)
 	return 0;
 }
 
-
-
 int
-devSSD1331_0_20(void)
+devSSD1331_countdown(void)
 {
-	writeCommand(0x22);
-	writeCommand(0x2C);
-	writeCommand(0x05);
-	writeCommand(0x30);
-	writeCommand(0x38);
-	writeCommand(0xFF);
-	writeCommand(0x3F);
-	writeCommand(0xFF);
-	writeCommand(0xFF);
-	writeCommand(0x3F);
-	writeCommand(0xFF);
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
+	//3
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x02);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x1F);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x21);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	OSA_TimeDelay(700);
+	
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
+	OSA_TimeDelay(300);
+	
+	//2
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x02);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x1F);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x21);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x20);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x20);	//column start
+	writeCommand(0x20);	//row start
+	writeCommand(0x22);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	OSA_TimeDelay(700);
+	
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
+	OSA_TimeDelay(300);
+	
+	//1
+	
+	writeCommand(0x22);	//rectangle command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x00);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//colour C (RED) of outline (max FF)
+	writeCommand(0x3F);	//colour B (GREEN) of outline (max 3F)
+	writeCommand(0xFF);	//colour A (BLUE) of outline (max FF)
+	writeCommand(0xFF);	//colour C of fill
+	writeCommand(0x3F);	//colour B of fill
+	writeCommand(0xFF);	//colour A of fill
+	
+	OSA_TimeDelay(700);
+	
+	writeCommand(kSSD1331CommandCLEAR);
+        writeCommand(0x00);
+        writeCommand(0x00);
+        writeCommand(0x5F);
+        writeCommand(0x3F);
+	
 	
 	return 0;
 }
