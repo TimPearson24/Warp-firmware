@@ -1402,12 +1402,11 @@ main(void)
 	int t1;
 	int t2;
 	int t3;
+	int reset_latch;
 	int average_time;
 	int time_array[16] = {0};
 	while (1)
 	{
-		int latch = 0;
-		int i = 0;
 		
 		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
@@ -1584,21 +1583,24 @@ main(void)
 		devSSD1331_axes();
 		devSSD1331_bars(time_array, time_bin_indicator, 16);
 		
+		reset_latch = 0;
+		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
 			//hold position in code until button is pressed
 			
-			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0 && reset_latch == 0)
 			{
-				//if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
-				//{
-				for(int x = 0; x < 16; x ++)
-    				{
-					time_array[x] = 0;
-					/*Reset each time array entry to 0*/
-    				}
-				SEGGER_RTT_printf(0, "\r\tCleared history\n");
-				//}
+				if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
+				{
+					reset_latch = 1;
+					for(int x = 0; x < 16; x ++)
+    					{
+						time_array[x] = 0;
+						/*Reset each time array entry to 0*/
+    					}
+					SEGGER_RTT_printf(0, "\r\tCleared history\n");
+				}
 			}
 		}
 		
