@@ -1410,7 +1410,7 @@ main(void)
 		int i = 0;
 		
 		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-		SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
+		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
 
 		
 		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
@@ -1579,20 +1579,24 @@ main(void)
 		}
 		SEGGER_RTT_printf(0, "\r\n0-19 = %d, 20-39 = %d, 40-59 = %d, 60-79 = %d, 80-99 = %d, 100-119 = %d, 120-139 = %d, 140-159 = %d, 160-179 = %d, 180-199 %d, 200-219 = %d, 220-239 = %d, 240-259 = %d, 260-279 = %d, 280-299 = %d, 300 plus = %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
 		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
-		SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
+		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
 
 		devSSD1331_axes();
-		devSSD1331_bars(time_array, time_bin_indicator, 15);
+		devSSD1331_bars(time_array, time_bin_indicator, 16);
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
 			//hold position in code until button is pressed
 			
-			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) != 0)
+			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
 			{
 				//if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 				//{
-				int time_array[16] = {0};
+				for(int x = 0; x < 16; x ++)
+    				{
+					time_array[x] = 0
+					/*Reset each time array entry to 0*/
+    				}
 				SEGGER_RTT_printf(0, "\r\tCleared history\n");
 				//}
 			}
