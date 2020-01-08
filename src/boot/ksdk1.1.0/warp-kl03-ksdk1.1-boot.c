@@ -1589,13 +1589,13 @@ main(void)
 					break;
 				}
 		}
-		SEGGER_RTT_printf(0, "\r\n\t%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
+		SEGGER_RTT_printf(0, "\r\n\t%d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
 		//SEGGER_RTT_printf(0, "\r\t%d\n", time_array[15]);
 		
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
-			devSSD1331_graph();
+			devSSD1331_axes();
 			devSSD1331_0_20();
 		}
 		
