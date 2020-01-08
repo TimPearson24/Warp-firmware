@@ -289,8 +289,8 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	if(max_value > max_growth_steps)
 	{
 		int divisor = 2;
-		n = max_value/max_growth_steps;
-		for (i = 0; i < n; i ++){		//self made power function as no such thing in c code
+		int n = max_value/max_growth_steps;	//this is the exponent for the divisor
+		for (int i = 0; i < n-1; i ++){		//self made power function as no such thing in c code
        			divisor *= 2;
 		growth_step = growth_step/divisor;	//make the growth step smaller
 	}
