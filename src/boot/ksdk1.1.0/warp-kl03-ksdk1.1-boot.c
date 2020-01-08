@@ -1469,7 +1469,7 @@ main(void)
 
 				case 20 ... 39:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[1] = 0;
 					time_array[1] ++;
 					SEGGER_RTT_printf(0, "\r\t20 - 39 = %d\n", time_array[1]);
 					break;
@@ -1477,7 +1477,7 @@ main(void)
 				
 				case 40 ... 59:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[2] = 0;
 					time_array[2] ++;
 					SEGGER_RTT_printf(0, "\r\t40 - 59 = %d\n", time_array[2]);
 					break;
@@ -1485,7 +1485,7 @@ main(void)
 
 				case 60 ... 79:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[3] = 0;
 					time_array[3] ++;
 					SEGGER_RTT_printf(0, "\r\t60 - 79 = %d\n", time_array[3]);
 					break;
@@ -1493,7 +1493,7 @@ main(void)
 
 				case 80 ... 99:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[4] = 0;
 					time_array[4] ++;
 					SEGGER_RTT_printf(0, "\r\t80 - 99 = %d\n", time_array[4]);
 					break;
@@ -1501,7 +1501,7 @@ main(void)
 				
 				case 100 ... 119:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[5] = 0;
 					time_array[5] ++;
 					SEGGER_RTT_printf(0, "\r\t100 - 119 = %d\n", time_array[5]);
 					break;
@@ -1509,7 +1509,7 @@ main(void)
 
 				case 120 ... 139:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[6] = 0;
 					time_array[6] ++;
 					SEGGER_RTT_printf(0, "\r\t120 - 139 = %d\n", time_array[6]);
 					break;
@@ -1517,7 +1517,7 @@ main(void)
 				
 				case 140 ... 159:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[7] = 0;
 					time_array[7] ++;
 					SEGGER_RTT_printf(0, "\r\t140 - 159 = %d\n", time_array[7]);
 					break;
@@ -1525,7 +1525,7 @@ main(void)
 
 				case 160 ... 179:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[8] = 0;
 					time_array[8] ++;
 					SEGGER_RTT_printf(0, "\r\t160 - 179 = %d\n", time_array[8]);
 					break;
@@ -1533,7 +1533,7 @@ main(void)
 
 				case 180 ... 199:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[9] = 0;
 					time_array[9] ++;
 					SEGGER_RTT_printf(0, "\r\t180 - 199 = %d\n", time_array[9]);
 					break;
@@ -1541,7 +1541,7 @@ main(void)
 				
 				case 200 ... 219:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[10] = 0;
 					time_array[10] ++;
 					SEGGER_RTT_printf(0, "\r\t200 - 219 = %d\n", time_array[10]);
 					break;
@@ -1549,7 +1549,7 @@ main(void)
 
 				case 220 ... 239:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[11] = 0;
 					time_array[11] ++;
 					SEGGER_RTT_printf(0, "\r\t220 - 239 = %d\n", time_array[11]);
 					break;
@@ -1557,7 +1557,7 @@ main(void)
 				
 				case 240 ... 259:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[12] = 0;
 					time_array[12] ++;
 					SEGGER_RTT_printf(0, "\r\t240 - 259 = %d\n", time_array[12]);
 					break;
@@ -1565,7 +1565,7 @@ main(void)
 
 				case 260 ... 279:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[13] = 0;
 					time_array[13] ++;
 					SEGGER_RTT_printf(0, "\r\t260 - 279 = %d\n", time_array[13]);
 					break;
@@ -1573,7 +1573,7 @@ main(void)
 
 				case 280 ... 299:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[14] = 0;
 					time_array[14] ++;
 					SEGGER_RTT_printf(0, "\r\t280 - 299 = %d\n", time_array[14]);
 					break;
@@ -1581,7 +1581,7 @@ main(void)
 				
 				case 300 ... 3000:
 				{
-					time_bin_indicator[0] = 0;
+					time_bin_indicator[15] = 0;
 					time_array[15] ++;
 					SEGGER_RTT_printf(0, "\r\t300 plus = %d\n", time_array[15]);
 					break;
