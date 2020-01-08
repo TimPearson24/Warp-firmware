@@ -1592,7 +1592,7 @@ main(void)
 			{
 				if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 				{
-					time_array[16] = {0};
+					int time_array[16] = {0};
 				}
 			}
 		}
