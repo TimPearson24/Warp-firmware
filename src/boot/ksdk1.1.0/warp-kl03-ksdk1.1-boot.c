@@ -1596,7 +1596,8 @@ main(void)
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
 			devSSD1331_axes();
-			devSSD1331_0_20();
+			devSSD1331_bars(time_array, 15);
+			//devSSD1331_0_20();
 		}
 		
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
