@@ -1591,9 +1591,10 @@ main(void)
 					break;
 				}
 		}
-		SEGGER_RTT_printf(0, "\r\n\t0-19 = %d, 20-39 = %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
-		//SEGGER_RTT_printf(0, "\r\t%d\n", time_array[15]);
-		
+		SEGGER_RTT_printf(0, "\r\n\t0-19 = %d, 20-39 = %d, 40-59 = %d, 60-79 = %d, 80-99 = %d, 100-119 = %d, 120-139 = %d, 140-159 = %d, 160-179 = %d, 180-199 %d, 200-219 = %d, 220-239 = %d, 240-259 = %d, 260-279 = %d, 280-299 = %d, 300 plus = %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
+		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
+		SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
+
 		
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
 		{
