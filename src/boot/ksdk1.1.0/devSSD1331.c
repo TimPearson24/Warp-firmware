@@ -251,7 +251,7 @@ devSSD1331_bars(int *time_bin, int size)
 	 * the next element of the array on each increment.
 	 *
 	 */
-	int t_array[15] = {0};
+	int t_array[16] = {0};
 	
 	for(int x = 0; x < size; x ++)
     	{
