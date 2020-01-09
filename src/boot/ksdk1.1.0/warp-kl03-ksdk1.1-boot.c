@@ -1020,6 +1020,7 @@ checkSum(uint8_t *  pointer, uint16_t length) /*	Adapted from https://stackoverf
 	return (uint8_t)sum;
 }
 #endif
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1032,33 +1033,27 @@ measure_time(void)
 {
 	latch = 1;
 	int i = 0;
-	//SEGGER_RTT_printf(0, "\r\tOn board pressed\n");
-	while (latch == 1 && i < 1500)
+	while (latch == 1 && i < 1500)		//i is the counter which increments every time delay period (1ms)
 	{
 		i = i + 1;
 		OSA_TimeDelay(1);
-		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)
+		if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0)		
 		{
-			latch = 0;
-			//SEGGER_RTT_printf(0, "\r\tOff board pressed\n");
+			latch = 0;		//if the off board button is pressed, change the latch state to break from the while loop
 		}
-//				else if (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 1)
-//				{
-//					OSA_TimeDelay(200);
-//					SEGGER_RTT_printf(0, "\r\tOff 0\n");
-//					//latch = 0;
-//				}
-//				SEGGER_RTT_printf(0, "%d", i);
 	}
-	time_count = 2*i;
-	//SEGGER_RTT_printf(0, "\r\tMeasured time = %d ms\n", time_count);
-	
+	time_count = 2*i;			//experimental analysis has shown that multiplying the count by 2 gives a fairly accurate time reading
+
 	return time_count;
 }
+/*This is not the best way to measure time in a program but for the purposes of this project it is acceptable because:
+* - relative times are more important than absolute times because it is the change in reaction time which is of interest
+* - the average human reaction time is between 100-200ms, so granularity less than the ms scale is not required
+* If this project was taken further, a timing system which toggles GPIO pins and measures a crystal clock count could be implemented
+*/
 
-
-
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 int
@@ -1395,33 +1390,33 @@ main(void)
 	 *	Notreached
 	 */
 #endif
+	
+	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	devSSD1331init();
-	int time_count = 0;
+
+	devSSD1331init();		//initialise OLED module
+	int time_count = 0;		
 	int t1;
 	int t2;
 	int t3;
 	int reset_latch;
 	int average_time;
-	int time_array[16] = {0};
+	int time_array[16] = {0};	//there will be 15 time bins between 0ms and 300ms (20ms each), and one time bin for reaction times over 300ms
 	while (1)
 	{
 		
-		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
-
+		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};	//this array is used to indicate which time bin the latest result falls in (by changing to 0)
 		
-		//SEGGER_RTT_printf(0, "\r\tin main loop\n");
 		enableI2Cpins(menuI2cPullupValue);
-		//printSensorDataINA219();
 		
+		//gather three readings of reaction time by flashing a white screen and measuring how long it takes to press the button after
 		SEGGER_RTT_printf(0, "\r\tPrepare for flash\n");
-		devSSD1331_countdown();
-		OSA_TimeDelay(1500);
+		devSSD1331_countdown();		//call the 3, 2, 1 countdown fcn in devSSD1331.c
+		OSA_TimeDelay(1500);		//delay times before flashes vary so that reaction time is better tested
 		
-		devSSD1331_flash(10);
-		t1 = measure_time();
+		devSSD1331_flash(10);		//call the flash fcn in devSSD1331.c, and flash for 10ms
+		t1 = measure_time();		//call the fcn outside the main loop which measures time
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t1);
 		OSA_TimeDelay(2500);
 		
@@ -1434,12 +1429,14 @@ main(void)
 		t3 = measure_time();
 		SEGGER_RTT_printf(0, "\r\tMeasured time 1 = %d ms\n", t3);
 		
+		//find an average of the three reaction times
 		average_time = (t1 + t2 + t3)/3;
 		
-		OSA_TimeDelay(1000);
+		OSA_TimeDelay(200);
 		
 		SEGGER_RTT_printf(0, "\r\tAverage time = %d ms\n", average_time);
 		
+		//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
 		switch(average_time)
 		{
 				case 0 ... 19:
@@ -1576,19 +1573,20 @@ main(void)
 					break;
 				}
 		}
+		
+		//print frequency count for all bins
 		SEGGER_RTT_printf(0, "\r\n0-19 = %d, 20-39 = %d, 40-59 = %d, 60-79 = %d, 80-99 = %d, 100-119 = %d, 120-139 = %d, 140-159 = %d, 160-179 = %d, 180-199 %d, 200-219 = %d, 220-239 = %d, 240-259 = %d, 260-279 = %d, 280-299 = %d, 300 plus = %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
-		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_array[0], time_array[1], time_array[2], time_array[3], time_array[4], time_array[5], time_array[6], time_array[7], time_array[8], time_array[9], time_array[10], time_array[11], time_array[12], time_array[13], time_array[14], time_array[15]);
-		//SEGGER_RTT_printf(0, "\r\n\ %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d, %d\n\n", time_bin_indicator[0], time_bin_indicator[1], time_bin_indicator[2], time_bin_indicator[3], time_bin_indicator[4], time_bin_indicator[5], time_bin_indicator[6], time_bin_indicator[7], time_bin_indicator[8], time_bin_indicator[9], time_bin_indicator[10], time_bin_indicator[11], time_bin_indicator[12], time_bin_indicator[13], time_bin_indicator[14], time_bin_indicator[15]);
-
-		devSSD1331_axes();
-		devSSD1331_bars(time_array, time_bin_indicator, 16);
+	
+		
+		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
+		devSSD1331_bars(time_array, time_bin_indicator, 16);	//plot the bars onto the axes
 		
 		reset_latch = 0;
 		
+		//this while loop holds the position in code until the on board button is pressed
 		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
-		{
-			//hold position in code until button is pressed
-			
+		{	
+			//if the off board button, then the on board button is pressed simultaneously, the data history will be cleared
 			if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL1) == 0 && reset_latch == 0)
 			{
 				if(GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) == 0)
@@ -1604,11 +1602,16 @@ main(void)
 			}
 		}
 		
+		//clear the screen and return to the start of the loop to repeat the test
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
 		devSSD1331_clearscreen();
 		
 		OSA_TimeDelay(2000);
-//
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 		//}
 		
 		
@@ -1640,6 +1643,9 @@ main(void)
 */	
 		
 		/*
+		
+		//printSensorDataINA219();
+		
 		uint16_t	readSensorRegisterValueLSB;
 		uint16_t	readSensorRegisterValueMSB;
 		int16_t		readSensorRegisterValueCombined;
