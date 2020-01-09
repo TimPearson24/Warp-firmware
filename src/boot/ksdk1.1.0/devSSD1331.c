@@ -174,23 +174,6 @@ devSSD1331init(void)
         writeCommand(0x5F);
         writeCommand(0x3F);
 
-
-
-	/*
-	 *	Any post-initialization drawing commands go here.
-	 */
-//	writeCommand(0x22);
-//	writeCommand(0x00);
-//      writeCommand(0x00);
-//      writeCommand(0x5F);
-//      writeCommand(0x3F);
-//	writeCommand(0x00);
-//	writeCommand(0x3F);
-//	writeCommand(0x00);
-//	writeCommand(0x00);
-//	writeCommand(0x3F);
-//	writeCommand(0x00);
-
 	return 0;
 }
 
@@ -198,12 +181,14 @@ devSSD1331init(void)
 int
 devSSD1331_flash(int flash_period)
 {
+	
 	writeCommand(kSSD1331CommandCLEAR);
         writeCommand(0x00);
         writeCommand(0x00);
         writeCommand(0x5F);
         writeCommand(0x3F);
 	
+	//draw rectangle that is white and fills the screen
 	writeCommand(0x22);
 	writeCommand(0x00);
 	writeCommand(0x00);
@@ -216,6 +201,7 @@ devSSD1331_flash(int flash_period)
 	writeCommand(0x3F);
 	writeCommand(0xFF);
 	
+	//keep the screen white for the flash period
 	OSA_TimeDelay(flash_period);
 	
 	writeCommand(kSSD1331CommandCLEAR);
@@ -241,14 +227,14 @@ devSSD1331_clearscreen(void)
 
 
 
-//function to generate and manipulate bars
+//function to generate and manipulate the bars in the graph
 int
 devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 {	
-	int t_array[16] = {0};
-	int t_indicator[16] = {0};
-	int growth_step = 0x10; //number of pixels grown per unit of frequency
-	int max_bar_height = 0x38;
+	int t_array[16] = {0};		//array to store the frequency count for each time bin
+	int t_indicator[16] = {0};	//array to store the indicator for which time bin is increasing
+	int growth_step = 0x10; 	//number of pixels grown per unit of frequency
+	int max_bar_height = 0x38;	//maximum number of pixels the bar can grow before reaching the top of the screen
 	
 	//create local array of the time bins
 	for(int x = 0; x < size; x ++)
@@ -540,7 +526,7 @@ devSSD1331_bars(int *time_bin, int *time_bin_indicator, int size)
 	return 0;
 }
 
-
+//function to draw the axes of the graph
 int
 devSSD1331_axes(void)
 {
@@ -960,6 +946,7 @@ devSSD1331_axes(void)
 	return 0;
 }
 
+//function which will generate a 3, 2, 1 countdown on the screen, with one second per number
 int
 devSSD1331_countdown(void)
 {
