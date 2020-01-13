@@ -1403,6 +1403,10 @@ main(void)
 	int reset_latch;
 	int average_time;
 	int time_array[16] = {0};	//there will be 15 time bins between 0ms and 300ms (20ms each), and one time bin for reaction times over 300ms
+	uint16_t readSensorRegisterValueLSB;
+	uint16_t readSensorRegisterValueMSB;
+	int16_t	readSensorRegisterValueCombined;
+	int16_t	currentMeasurement;
 	while (1)
 	{
 		
