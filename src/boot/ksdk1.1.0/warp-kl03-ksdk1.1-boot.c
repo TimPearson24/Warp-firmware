@@ -1414,7 +1414,7 @@ main(void)
 	{
 		
 		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};	//this array is used to indicate which time bin the latest result falls in (by changing to 0)
-		int current_array[16] = {0}			//this array stores the number of times the current falls in a specified range
+		int current_array[16] = {0};			//this array stores the number of times the current falls in a specified range
 		
 		enableI2Cpins(menuI2cPullupValue);
 		
