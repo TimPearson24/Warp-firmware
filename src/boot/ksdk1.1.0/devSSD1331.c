@@ -981,7 +981,7 @@ devSSD1331_current_axes(void)
 	writeCommand(0x00);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0x00);	//blue colour
-	//100 pointer
+	//5 pointer
 	writeCommand(0x21);	//line command
 	writeCommand(0x1E);	//column start
 	writeCommand(0x3A);	//row start
@@ -990,7 +990,7 @@ devSSD1331_current_axes(void)
 	writeCommand(0x00);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0x00);	//blue colour
-	//200 pointer
+	//10 pointer
 	writeCommand(0x21);	//line command
 	writeCommand(0x3C);	//column start
 	writeCommand(0x3A);	//row start
@@ -999,7 +999,7 @@ devSSD1331_current_axes(void)
 	writeCommand(0x00);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0x00);	//blue colour
-	//300 pointer
+	//15 pointer
 	writeCommand(0x21);	//line command
 	writeCommand(0x5A);	//column start
 	writeCommand(0x3A);	//row start
@@ -1008,7 +1008,7 @@ devSSD1331_current_axes(void)
 	writeCommand(0x00);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0x00);	//blue colour
-	/*
+	
 	//draw 0
 	writeCommand(0x21);	//line command
 	writeCommand(0x00);	//column start
@@ -1046,326 +1046,237 @@ devSSD1331_current_axes(void)
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
-	//draw 100
+	//draw 5
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x1a);	//column start
+	writeCommand(0x1D);	//column start
 	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x1a);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x1c);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x1c);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x1c);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x1c);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x1c);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x1c);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x1c);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x1c);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x20);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x20);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x20);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x20);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x20);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x20);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x20);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x20);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	//draw 200
-		//2
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x39);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37);	//column start
-	writeCommand(0x3D);	//row start
-	writeCommand(0x00+0x39);	//column end
+	writeCommand(0x1D);	//column end
 	writeCommand(0x3D);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x00+0x39);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x39);	//column start
-	writeCommand(0x3C);	//row start
-	writeCommand(0x00+0x39);	//column end
-	writeCommand(0x3C);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37);	//column start
-	writeCommand(0x3E);	//row start
-	writeCommand(0x00+0x37);	//column end
-	writeCommand(0x3E);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-		//0 (tens)
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x3B);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x3B);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x3B);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x3B);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x3B);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x3B);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x3B);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x3B);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-		//0 (ones)
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x3F);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x3F);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x3F);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x3F);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x3F);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x3F);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x3F);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x3F);	//column end
-	writeCommand(0x3F);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	//draw 300
-		//3
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37+0x1E);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x39+0x1E);	//column end
-	writeCommand(0x3B);	//row end
-	writeCommand(0xFF);	//red colour
-	writeCommand(0x3F);	//green colour
-	writeCommand(0xFF);	//blue colour
-	
-	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37+0x1E);	//column start
+	writeCommand(0x1F);	//column start
 	writeCommand(0x3D);	//row start
-	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x1F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x1D);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x1F);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x1D);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(0x1F);	//column end
 	writeCommand(0x3D);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x37+0x1E);	//column start
+	writeCommand(0x1D);	//column start
 	writeCommand(0x3F);	//row start
-	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(0x1F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	//draw 10
+	writeCommand(0x21);	//line command
+	writeCommand(0x3A);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x3A);	//column end
 	writeCommand(0x3F);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x39+0x1E);	//column start
+	writeCommand(0x3C);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x3C);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x3E);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x3E);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(0x3D);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(0x3D);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(0x3F);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	//draw 15
+	writeCommand(0x21);	//line command
+	writeCommand(88);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(88);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(90);	//column start
+	writeCommand(0x3B);	//row start
+	writeCommand(92);	//column end
+	writeCommand(0x3B);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(90);	//column start
+	writeCommand(0x3D);	//row start
+	writeCommand(92);	//column end
+	writeCommand(0x3D);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(90);	//column start
+	writeCommand(0x3F);	//row start
+	writeCommand(92);	//column end
+	writeCommand(0x3F);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
+	writeCommand(0x21);	//line command
+	writeCommand(90);	//column start
 	writeCommand(0x3C);	//row start
-	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(90);	//column end
 	writeCommand(0x3C);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x39+0x1E);	//column start
+	writeCommand(92);	//column start
 	writeCommand(0x3E);	//row start
-	writeCommand(0x00+0x39+0x1E);	//column end
+	writeCommand(92);	//column end
 	writeCommand(0x3E);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
-		//0 (tens)
+	
+	//draw mA
+	//m
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x59);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x59);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(82);	//column start
+	writeCommand(0x03);	//row start
+	writeCommand(82);	//column end
+	writeCommand(0x07);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x59);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x59);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(82);	//column start
+	writeCommand(0x03);	//row start
+	writeCommand(86);	//column end
+	writeCommand(0x03);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x59);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x59);	//column end
-	writeCommand(0x3B);	//row end
+	writeCommand(84);	//column start
+	writeCommand(0x03);	//row start
+	writeCommand(84);	//column end
+	writeCommand(0x05);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x59);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x59);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(86);	//column start
+	writeCommand(0x03);	//row start
+	writeCommand(86);	//column end
+	writeCommand(0x07);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
-		//0 (ones)
+	
+	//A
 	writeCommand(0x21);	//line command
-	writeCommand(0x00+0x5D);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x00+0x5D);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(89);	//column start
+	writeCommand(0x04);	//row start
+	writeCommand(89);	//column end
+	writeCommand(0x07);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x02+0x5D);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x02+0x5D);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(89);	//column start
+	writeCommand(0x02);	//row start
+	writeCommand(91);	//column end
+	writeCommand(0x04);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x5D);	//column start
-	writeCommand(0x3B);	//row start
-	writeCommand(0x01+0x5D);	//column end
-	writeCommand(0x3B);	//row end
+	writeCommand(91);	//column start
+	writeCommand(0x02);	//row start
+	writeCommand(93);	//column end
+	writeCommand(0x04);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(0x01+0x5D);	//column start
-	writeCommand(0x3F);	//row start
-	writeCommand(0x01+0x5D);	//column end
-	writeCommand(0x3F);	//row end
+	writeCommand(89);	//column start
+	writeCommand(0x05);	//row start
+	writeCommand(93);	//column end
+	writeCommand(0x05);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
 	writeCommand(0xFF);	//blue colour
-	*/
+	
+	writeCommand(0x21);	//line command
+	writeCommand(93);	//column start
+	writeCommand(0x04);	//row start
+	writeCommand(93);	//column end
+	writeCommand(0x07);	//row end
+	writeCommand(0xFF);	//red colour
+	writeCommand(0x3F);	//green colour
+	writeCommand(0xFF);	//blue colour
+	
 	return 0;
 }
 
