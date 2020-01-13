@@ -1408,7 +1408,7 @@ main(void)
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
 	int n = 50;	//number of current measurements to make
-	int current_measurement_array[n] = {0};
+	int current_measurement_array[50] = {0};	//number of entries in this array must be equal to n
 	int averageCurrent = 0;
 	while (1)
 	{
