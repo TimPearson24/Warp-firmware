@@ -1407,8 +1407,8 @@ main(void)
 	uint16_t readSensorRegisterValueMSB;
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
-	int n = 10;	//number of current measurements to make
-	int current_measurement_array[10] = {0};	//number of entries in this array must be equal to n
+	int n = 30;	//number of current measurements to make
+	int current_measurement_array[30] = {0};	//number of entries in this array must be equal to n
 	int averageCurrent = 0;
 	while (1)
 	{
@@ -1750,7 +1750,7 @@ main(void)
 		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
 		devSSD1331_bars(current_array, time_bin_indicator, 16);	//plot the bars onto the axes
 		
-		OSA_TimeDelay(2000);
+		OSA_TimeDelay(4000);
 
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
