@@ -1601,8 +1601,9 @@ main(void)
 			readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
 			readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
 			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
+			SEGGER_RTT_printf(0,"\r%d\n", currentMeasurement);	//print current measurement to screen
 			
+			//add measurement to the sum measurement so an average can be found later
 			currentSum += currentMeasurement;
 			
 			//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
