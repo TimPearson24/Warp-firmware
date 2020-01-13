@@ -1408,7 +1408,7 @@ main(void)
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
 	int n = 30;	//number of current measurements to make
-	int current_measurement_array[30] = {0};	//number of entries in this array must be equal to n
+	//int current_measurement_array[30] = {0};	//number of entries in this array must be equal to n
 	int averageCurrent = 0;
 	while (1)
 	{
@@ -1603,7 +1603,7 @@ main(void)
 			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
 			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
 			
-			current_measurement_array[k] = currentMeasurement;
+			//current_measurement_array[k] = currentMeasurement;
 			
 			//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
 			switch(currentMeasurement)
@@ -1713,7 +1713,7 @@ main(void)
 			
 			k = k + 1;
 		}
-		
+		/*
 		int currentSum = 0;
 		for(int r = 0; r < n; r ++)
 		{
@@ -1722,7 +1722,7 @@ main(void)
 		
 		averageCurrent = currentSum/n;
 		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print current measurement to screen
-		
+		*/
 		reset_latch = 0;
 		
 		//this while loop holds the position in code until the on board button is pressed
