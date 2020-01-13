@@ -1403,10 +1403,13 @@ main(void)
 	int reset_latch;
 	int average_time;
 	int time_array[16] = {0};	//there will be 15 time bins between 0ms and 300ms (20ms each), and one time bin for reaction times over 300ms
+	
+	//variables for INA219 current measurement
 	uint16_t readSensorRegisterValueLSB;
 	uint16_t readSensorRegisterValueMSB;
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
+	
 	int n = 100;	//number of current measurements to make
 	int averageCurrent = 0;
 	while (1)
@@ -1592,6 +1595,7 @@ main(void)
 		
 		int k = 0;
 		int currentSum = 0;
+		//collect n measurements of the current through the OLED
 		while(k < n)
 		{
 			//code to measure the amount of current consumed by the OLED
@@ -1714,7 +1718,8 @@ main(void)
 			
 			k = k + 1;
 		}
-
+		
+		//calculate and display the average current
 		averageCurrent = currentSum/n;
 		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print average current measurement to screen
 		
@@ -1744,7 +1749,7 @@ main(void)
 		//clear the screen and return to the start of the loop to repeat the test
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
 		devSSD1331_clearscreen();
-		devSSD1331_current_axes();	//call the function which plots the axes on the OLED screen
+		devSSD1331_current_axes();	//call the function which plots the current axes on the OLED screen
 		devSSD1331_bars(current_array, current_bin_indicator, 16);	//plot the bars onto the axes
 		
 		//this while loop holds the position in code until the on board button is pressed
