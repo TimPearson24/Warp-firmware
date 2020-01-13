@@ -1581,6 +1581,15 @@ main(void)
 		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
 		devSSD1331_bars(time_array, time_bin_indicator, 16);	//plot the bars onto the axes
 		
+		//code to measure the amount of current consumed by the OLED
+		writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+		readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+		readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+       		readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+   		readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
+		currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+		SEGGER_RTT_printf(0,"\r\tcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
+		
 		reset_latch = 0;
 		
 		//this while loop holds the position in code until the on board button is pressed
@@ -1607,6 +1616,23 @@ main(void)
 		devSSD1331_clearscreen();
 		
 		OSA_TimeDelay(2000);
+		/*
+		int k = 0;
+		
+		while(k < 1000)
+		{
+			writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+			readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+			readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+        		readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+   	   		readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
+			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+			SEGGER_RTT_printf(0,"%d\n", currentMeasurement);	//print current measurement to screen
+			
+			k = k + 1;
+		}
+		SEGGER_RTT_printf(0, "\r\t1000 measurements clocked\n");	//print current measurement to screen
+		*/
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
