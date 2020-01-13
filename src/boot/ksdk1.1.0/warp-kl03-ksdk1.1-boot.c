@@ -1414,6 +1414,7 @@ main(void)
 	{
 		
 		int time_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};	//this array is used to indicate which time bin the latest result falls in (by changing to 0)
+		int current_array[16] = {0}			//this array stores the number of times the current falls in a specified range
 		
 		enableI2Cpins(menuI2cPullupValue);
 		
@@ -1603,6 +1604,113 @@ main(void)
 			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
 			
 			current_measurement_array[k] = currentMeasurement;
+			
+			//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
+			switch(currentMeasurement)
+			{
+					case 0 ... 999:
+					{
+						current_array[0] ++;
+						break;
+					}
+
+					case 1000 ... 1999:
+					{
+						current_array[1] ++;
+						break;
+					}
+
+					case 2000 ... 2999:
+					{
+						current_array[2] ++;
+						break;
+					}
+
+					case 3000 ... 3999:
+					{
+						current_array[3] ++;
+						break;
+					}
+
+					case 4000 ... 4999:
+					{
+						current_array[4] ++;
+						break;
+					}
+
+					case 5000 ... 5999:
+					{
+						current_array[5] ++;
+						break;
+					}
+
+					case 6000 ... 6999:
+					{
+						current_array[6] ++;
+						break;
+					}
+
+					case 7000 ... 7999:
+					{
+						current_array[7] ++;
+						break;
+					}
+
+					case 8000 ... 8999:
+					{
+						current_array[8] ++;
+						break;
+					}
+
+					case 9000 ... 9999:
+					{
+						current_array[9] ++;
+						break;
+					}
+
+					case 10000 ... 10999:
+					{
+						current_array[10] ++;
+						break;
+					}
+
+					case 11000 ... 11999:
+					{
+						current_array[11] ++;
+						break;
+					}
+
+					case 12000 ... 12999:
+					{
+						current_array[12] ++;
+						break;
+					}
+
+					case 13000 ... 13999:
+					{
+						current_array[13] ++;
+						break;
+					}
+
+					case 14000 ... 14999:
+					{
+						current_array[14] ++;
+						break;
+					}
+
+					case 15000 ... 15999:
+					{
+						current_array[15] ++;
+						break;
+					}
+
+					default:
+					{
+						//assume all other values outside the above range are outliers
+						break;
+					}
+			}
+			
 			k = k + 1;
 		}
 		
@@ -1639,6 +1747,8 @@ main(void)
 		//clear the screen and return to the start of the loop to repeat the test
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
 		devSSD1331_clearscreen();
+		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
+		devSSD1331_bars(current_array, time_bin_indicator, 16);	//plot the bars onto the axes
 		
 		OSA_TimeDelay(2000);
 
