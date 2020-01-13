@@ -1408,7 +1408,6 @@ main(void)
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
 	int n = 100;	//number of current measurements to make
-	//int current_measurement_array[30] = {0};	//number of entries in this array must be equal to n
 	int averageCurrent = 0;
 	while (1)
 	{
@@ -1604,8 +1603,6 @@ main(void)
 			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
 			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
 			
-			//current_measurement_array[k] = currentMeasurement;
-			
 			currentSum += currentMeasurement;
 			
 			//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
@@ -1716,13 +1713,7 @@ main(void)
 			
 			k = k + 1;
 		}
-		/*
-		int currentSum = 0;
-		for(int r = 0; r < n; r ++)
-		{
-			currentSum += current_measurement_array[r];
-		}
-		*/
+
 		averageCurrent = currentSum/n;
 		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print average current measurement to screen
 		
@@ -1747,13 +1738,19 @@ main(void)
 			}
 		}
 		
+		int current_bin_indicator[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}; 	//create array of 1s to pass into the bar plotting function so that they are all white
+		
 		//clear the screen and return to the start of the loop to repeat the test
 		SEGGER_RTT_printf(0, "\r\tEscape graphing\n");
 		devSSD1331_clearscreen();
-		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
-		devSSD1331_bars(current_array, time_bin_indicator, 16);	//plot the bars onto the axes
+		devSSD1331_current_axes();	//call the function which plots the axes on the OLED screen
+		devSSD1331_bars(current_array, current_bin_indicator, 16);	//plot the bars onto the axes
 		
-		OSA_TimeDelay(4000);
+		//this while loop holds the position in code until the on board button is pressed
+		while (GPIO_DRV_ReadPinInput(kWarpPinTPS82740_VSEL3) != 0)
+		{	
+			//hold position in code
+		}
 
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
