@@ -1407,6 +1407,9 @@ main(void)
 	uint16_t readSensorRegisterValueMSB;
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
+	int n = 50;	//number of current measurements to make
+	int current_measurement_array[n] = {0};
+	int averageCurrent = 0;
 	while (1)
 	{
 		
@@ -1585,14 +1588,30 @@ main(void)
 		devSSD1331_axes();	//call the function which plots the axes on the OLED screen
 		devSSD1331_bars(time_array, time_bin_indicator, 16);	//plot the bars onto the axes
 		
-		//code to measure the amount of current consumed by the OLED
-		writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
-		readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
-		readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
-       		readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
-   		readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
-		currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
-		SEGGER_RTT_printf(0,"\r\tcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
+		int k = 0;
+		while(k < n)
+		{
+			//code to measure the amount of current consumed by the OLED
+			writeSensorRegisterINA219(0x01,0x00,1);		//need to write to the register that you want to access
+			readSensorRegisterINA219(2);			//only parameter is number of bytes to read as the address is determined by previous line
+			readSensorRegisterValueMSB = deviceINA219State.i2cBuffer[0];
+			readSensorRegisterValueLSB = deviceINA219State.i2cBuffer[1];
+			readSensorRegisterValueCombined = ((readSensorRegisterValueMSB & 0xFF) << 8) | (readSensorRegisterValueLSB & 0xFF);	//combine the two bytes to a 16 bit value
+			currentMeasurement = (readSensorRegisterValueCombined*10)/0.1; 	//I = Vshunt/Rshunt = registerValue*10uVresolution/0.1ohmShunt
+			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
+			
+			current_measurement_array[k] = currentMeasurement;
+			k = k + 1;
+		}
+		
+		int currentSum = 0;
+		for(int r = 0; r < n; r ++)
+		{
+			currentSum += current_measurement_array[r];
+		}
+		
+		averageCurrent = currentSum/n;
+		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print current measurement to screen
 		
 		reset_latch = 0;
 		
