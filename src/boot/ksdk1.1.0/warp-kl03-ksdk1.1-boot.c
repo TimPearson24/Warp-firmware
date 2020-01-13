@@ -1407,7 +1407,7 @@ main(void)
 	uint16_t readSensorRegisterValueMSB;
 	int16_t	readSensorRegisterValueCombined;
 	int16_t	currentMeasurement;
-	int n = 30;	//number of current measurements to make
+	int n = 100;	//number of current measurements to make
 	//int current_measurement_array[30] = {0};	//number of entries in this array must be equal to n
 	int averageCurrent = 0;
 	while (1)
@@ -1592,6 +1592,7 @@ main(void)
 		OSA_TimeDelay(200);
 		
 		int k = 0;
+		int currentSum = 0;
 		while(k < n)
 		{
 			//code to measure the amount of current consumed by the OLED
@@ -1604,6 +1605,8 @@ main(void)
 			SEGGER_RTT_printf(0,"\rcurrent measurement = %d\n", currentMeasurement);	//print current measurement to screen
 			
 			//current_measurement_array[k] = currentMeasurement;
+			
+			currentSum += currentMeasurement;
 			
 			//depending on what time bin (range) the result falls in, increment the frequency in the corresponding time_array bin and set the corresponding time_bin_indicator to 0
 			switch(currentMeasurement)
@@ -1719,10 +1722,10 @@ main(void)
 		{
 			currentSum += current_measurement_array[r];
 		}
-		
-		averageCurrent = currentSum/n;
-		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print current measurement to screen
 		*/
+		averageCurrent = currentSum/n;
+		SEGGER_RTT_printf(0,"\r\taverage current = %d\n", averageCurrent);	//print average current measurement to screen
+		
 		reset_latch = 0;
 		
 		//this while loop holds the position in code until the on board button is pressed
