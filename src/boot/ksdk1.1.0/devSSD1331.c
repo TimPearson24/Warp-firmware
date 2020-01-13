@@ -1242,9 +1242,9 @@ devSSD1331_current_axes(void)
 	writeCommand(0xFF);	//blue colour
 	
 	writeCommand(0x21);	//line command
-	writeCommand(89);	//column start
+	writeCommand(91);	//column start
 	writeCommand(0x02);	//row start
-	writeCommand(91);	//column end
+	writeCommand(89);	//column end
 	writeCommand(0x04);	//row end
 	writeCommand(0xFF);	//red colour
 	writeCommand(0x3F);	//green colour
